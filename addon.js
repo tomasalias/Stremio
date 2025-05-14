@@ -259,12 +259,6 @@ builder.defineStreamHandler(async ({ type, id, name, episode, year }) => {
         return { streams: [] };
     }
 
-    // If the name contains a colon, we need to split it
-    if (name.includes(':')) {
-        const parts = name.split(':');
-        name = parts[0].trim();
-    }
-
     // For series, we need to handle episodes
     let searchQuery = name;
     let additionalQuery = null;
@@ -293,6 +287,12 @@ builder.defineStreamHandler(async ({ type, id, name, episode, year }) => {
     // If no results and we have an additional query, try that
     if (results.length === 0 && additionalQuery) {
         results = await searchHellspy(additionalQuery);
+    }
+
+    if (results.length === 0 && name.includes(':')) {
+        const parts = name.split(':');
+        name = parts[0].trim();
+        results = await searchHellspy(name);
     }
     
     // If still no results, try a more generic search with just the name
