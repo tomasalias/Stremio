@@ -2,8 +2,64 @@ const { addonBuilder } = require('stremio-addon-sdk');
 const axios = require('axios');
 const cheerio = require('cheerio');
 
-// Define the base URL for hellspy
 const BASE_URL = 'https://hellspy.to';
+
+// Proxy configuration from environment variables
+const PROXY_HOST = process.env.CZECH_PROXY_HOST;
+const PROXY_PORT = process.env.CZECH_PROXY_PORT;
+const PROXY_USERNAME = process.env.CZECH_PROXY_USERNAME;
+const PROXY_PASSWORD = process.env.CZECH_PROXY_PASSWORD;
+
+let proxyConfig = null;
+if (PROXY_HOST && PROXY_PORT) {
+    const auth = PROXY_USERNAME && PROXY_PASSWORD 
+        ? `${PROXY_USERNAME}:${PROXY_PASSWORD}@` 
+        : '';
+    proxyConfig = {
+        protocol: 'http',
+        host: PROXY_HOST,
+        port: PROXY_PORT,
+        auth: auth ? { username: PROXY_USERNAME, password: PROXY_PASSWORD } : undefined
+    };
+    console.log(`Proxy configured: ${PROXY_HOST}:${PROXY_PORT}`);
+} else {
+    console.log('No proxy configuration found in environment variables');
+}
+
+async function isInCzechRepublic() {
+    try {
+        const response = await axios.get('https://ipinfo.io/json');
+        const country = response.data.country;
+        console.log(`Current server country: ${country}`);
+        return country === 'CZ';
+    } catch (error) {
+        console.error('Error detecting country, assuming not in Czech Republic:', error);
+        return false;
+    }
+}
+
+// Create an axios instance that might use the proxy
+let axiosInstance = axios;
+let proxyEnabled = false;
+
+// Initialize the proxy if needed
+(async () => {
+    if (proxyConfig && !(await isInCzechRepublic())) {
+        const HttpsProxyAgent = require('https-proxy-agent');
+        const proxyUrl = `http://${proxyConfig.auth ? proxyConfig.auth.username + ':' + proxyConfig.auth.password + '@' : ''}${proxyConfig.host}:${proxyConfig.port}`;
+        const httpsAgent = new HttpsProxyAgent(proxyUrl);
+        
+        axiosInstance = axios.create({
+            httpsAgent,
+            proxy: false  // Don't use Node's default proxy handling
+        });
+        
+        proxyEnabled = true;
+        console.log('Using Czech proxy for Hellspy requests');
+    } else {
+        console.log('No proxy needed - either in Czech Republic or no proxy configured');
+    }
+})();
 
 // Create a simple cache to avoid redundant searches
 const searchCache = new Map();
@@ -34,7 +90,7 @@ async function searchHellspy(query) {
     
     try {
         console.log(`Searching Hellspy for "${query}"...`);
-        const response = await axios.get(`${BASE_URL}/?query=${encodeURIComponent(query)}`);
+        const response = await axiosInstance.get(`${BASE_URL}/?query=${encodeURIComponent(query)}`);
         const $ = cheerio.load(response.data);
         
         const results = [];
@@ -96,7 +152,7 @@ async function getStreamUrl(videoId, hash) {
     try {
         console.log(`Getting stream info for ${hash}/${videoId}...`);
         const url = `${BASE_URL}/video/${hash}/${videoId}`;
-        const response = await axios.get(url);
+        const response = await axiosInstance.get(url);
         const $ = cheerio.load(response.data);
         
         // Find the download button and get its href
@@ -139,7 +195,7 @@ async function getTitleFromWikidata(imdbId) {
         const url = 'https://query.wikidata.org/sparql';
         const headers = { 'Accept': 'application/sparql-results+json' };
         
-        const response = await axios.get(url, {
+        const response = await axios.get(url, {  // Use default axios here, no proxy needed for Wikidata
             params: { query },
             headers
         });
@@ -174,8 +230,7 @@ async function getTitleFromWikidata(imdbId) {
 builder.defineStreamHandler(async ({ type, id, name, episode, year }) => {
     console.log('Stream request:', type, id, name, episode);
 
-    // If the id looks like this: tt15571732:1:1, we need to split it
-    // and get the first part as the id and the second part as the season and episode
+    // Check if the ID is in the format "tt1234567:1:2" (IMDb ID with season and episode)
     if (id.includes(':')) {
         const parts = id.split(':');
         id = parts[0];
@@ -185,8 +240,7 @@ builder.defineStreamHandler(async ({ type, id, name, episode, year }) => {
         };
     }
 
-    // If we don't have a name but we have an IMDb ID, try to get the title info
-    // from Wikidata
+    // If we don't have a name but we have an IMDb ID, try to get the title info from Wikidata
     if (!name && id.startsWith('tt')) {
         const titleInfo = await getTitleFromWikidata(id);
         if (titleInfo) {
@@ -203,6 +257,12 @@ builder.defineStreamHandler(async ({ type, id, name, episode, year }) => {
     if (!name) {
         console.log(`Could not find title name for id: ${id}`);
         return { streams: [] };
+    }
+
+    // If the name contains a colon, we need to split it
+    if (name.includes(':')) {
+        const parts = name.split(':');
+        name = parts[0].trim();
     }
 
     // For series, we need to handle episodes
