@@ -230,7 +230,7 @@ async function getTitleFromWikidata(imdbId) {
       const year = result.publicationDate?.value?.substring(0, 4) || null;
       const type = result.instanceLabel?.value || null;
 
-      console.log(`Found title: ${title} (${year})`);
+      console.log(`Found title: ${originalTitle} (${year})`);
       return {
         czTitle,
         enTitle,
