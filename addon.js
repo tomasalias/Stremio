@@ -266,7 +266,7 @@ builder.defineStreamHandler(async ({ type, id, name, episode, year }) => {
   if (!name && id.startsWith("tt")) {
     const titleInfo = await getTitleFromWikidata(id);
     if (titleInfo) {
-      name = titleInfo.czTitle;
+      name = titleInfo.czTitle || titleInfo.enTitle || titleInfo.originalTitle;
       year = titleInfo.year;
       // If type wasn't provided but we got it from IMDb, use that
       if (!type && titleInfo.type) {
