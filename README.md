@@ -45,7 +45,11 @@ This addon allows you to search and stream content from Hellspy.to directly in S
 - This addon doesn't download files but streams them through stremio-local-addon
 - Streaming quality depends on the source file quality from Hellspy.to
 - No registration or login required
+- A proxy or VPN with a Czech IP address may be required as Hellspy.to is primarily accessible from Czechia
+- Some content might be geo-restricted to Czech Republic and Slovakia
 
 ## License
 
-GPL-2.0
+This project is licensed under the GNU General Public License v2.0 - see the [LICENSE](LICENSE) file for details.
+
+Made by Dominik Pašek.
