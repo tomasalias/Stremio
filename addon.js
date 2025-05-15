@@ -289,26 +289,27 @@ builder.defineStreamHandler(async ({ type, id, name, episode, year }) => {
         results = await searchHellspy(additionalQuery);
     }
 
+    // If no results and we have name with special character, split it
     if (results.length === 0 && name.includes(':')) {
         const parts = name.split(':');
+        name = parts[0].trim();
         if (type === 'series' && episode) {
-            name = parts[0].trim();
-            
             // First try with the full format
             searchQuery = `${name} S${seasonStr}E${episodeStr}`;
         
             // Prepare a backup query format with just the name and episode identifier
             additionalQuery = `${name} ${seasonStr}x${episodeStr}`;
 
+            // First attempt with the primary search query
             results = await searchHellspy(searchQuery);
         }
         
         if (type === 'movie') {
-            name = parts[0].trim();
             // For movies, we can use the name and year
             searchQuery = name + " " + year;
             additionalQuery = name;
 
+            // First attempt with the primary search query
             results = await searchHellspy(searchQuery);
         }
         
