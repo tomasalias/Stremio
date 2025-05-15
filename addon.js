@@ -181,7 +181,9 @@ async function getStreamUrl(videoId, hash) {
 // Get title information from Wikidata using SPARQL and IMDb ID
 async function getTitleFromWikidata(imdbId) {
   try {
-    console.log(`Fetching Czech and English titles for ${imdbId} from Wikidata SPARQL endpoint`);
+    console.log(
+      `Fetching Czech and English titles for ${imdbId} from Wikidata SPARQL endpoint`
+    );
 
     const baseQuery = (lang) => `
       SELECT ?film ?filmLabel ?originalTitle ?publicationDate ?instanceLabel WHERE {
@@ -209,13 +211,26 @@ async function getTitleFromWikidata(imdbId) {
 
     const czTitle = czResult.filmLabel?.value || null;
     const enTitle = enResult.filmLabel?.value || null;
-    const originalTitle = czResult.originalTitle?.value || enResult.originalTitle?.value || null;
-    const year = czResult.publicationDate?.value?.substring(0, 4) || enResult.publicationDate?.value?.substring(0, 4) || null;
-    const type = czResult.instanceLabel?.value || enResult.instanceLabel?.value || null;
+    const originalTitle =
+      czResult.originalTitle?.value || enResult.originalTitle?.value || null;
+    const year =
+      czResult.publicationDate?.value?.substring(0, 4) ||
+      enResult.publicationDate?.value?.substring(0, 4) ||
+      null;
+    const type =
+      czResult.instanceLabel?.value || enResult.instanceLabel?.value || null;
 
-    console.log(`Found titles: CZ: ${czTitle}, EN: ${enTitle}, Year: ${year}`);
+    // Check if the Czech title is a Wikidata entity ID (starts with Q followed by numbers)
+    const isWikidataId = czTitle && /^Q\d+$/.test(czTitle);
+    const validCzTitle = isWikidataId ? null : czTitle;
+
+    console.log(
+      `Found titles: CZ: ${
+        validCzTitle || "Not available"
+      }, EN: ${enTitle}, Year: ${year}`
+    );
     return {
-      czTitle,
+      czTitle: validCzTitle,
       enTitle,
       originalTitle,
       year,
@@ -240,7 +255,6 @@ builder.defineStreamHandler(async ({ type, id, name, episode, year }) => {
       number: parseInt(parts[2]),
     };
   }
-
   // If we don't have a name but we have an IMDb ID, try to get the title info from Wikidata
   if (!name && id.startsWith("tt")) {
     const titleInfo = await getTitleFromWikidata(id);
@@ -260,9 +274,23 @@ builder.defineStreamHandler(async ({ type, id, name, episode, year }) => {
     return { streams: [] };
   }
 
+  // Store the original name before any modifications
+  const originalName = name;
+  // Try to clean up the title - if it has a colon, split and use the first part
+  let simplifiedName = name;
+  if (name.includes(":")) {
+    const parts = name.split(":");
+    simplifiedName = parts[0].trim();
+    console.log(
+      `Title contains colon, trying simplified name: "${simplifiedName}"`
+    );
+  }
+
   // For series, we need to handle episodes
   let searchQuery = name;
   let additionalQuery = null;
+  let simplifiedQuery = null;
+  let simplifiedAdditionalQuery = null;
 
   if (type === "series" && name && episode) {
     // Format the search query for TV shows, e.g. "Show Name S01E05"
@@ -271,15 +299,25 @@ builder.defineStreamHandler(async ({ type, id, name, episode, year }) => {
 
     // First try with the full format
     searchQuery = `${name} S${seasonStr}E${episodeStr}`;
-
     // Prepare a backup query format with just the name and episode identifier
     additionalQuery = `${name} ${seasonStr}x${episodeStr}`;
+
+    // Add simplified queries (without colon) if applicable
+    if (simplifiedName !== name) {
+      simplifiedQuery = `${simplifiedName} S${seasonStr}E${episodeStr}`;
+      simplifiedAdditionalQuery = `${simplifiedName} ${seasonStr}x${episodeStr}`;
+    }
   } else if (type === "movie" && name) {
     // For movies, we can use the name and year
-    searchQuery = name + " " + year;
+    searchQuery = name + (year ? " " + year : "");
     additionalQuery = name;
-  }
 
+    // Add simplified queries (without colon) if applicable
+    if (simplifiedName !== name) {
+      simplifiedQuery = simplifiedName + (year ? " " + year : "");
+      simplifiedAdditionalQuery = simplifiedName;
+    }
+  }
   // An attempt to search Hellspy with the initial query
   let results = await searchHellspy(searchQuery);
 
@@ -288,71 +326,102 @@ builder.defineStreamHandler(async ({ type, id, name, episode, year }) => {
     results = await searchHellspy(additionalQuery);
   }
 
-  // If no results and we have a name with a colon, try searching without the colon
-  if (results.length === 0 && name.includes(":")) {
-    const parts = name.split(":");
-    name = parts[0].trim();
-    if (type === "series" && episode) {
-      // Format the search query for TV shows, e.g. "Show Name S01E05"
-      const seasonStr = episode.season.toString().padStart(2, "0");
-      const episodeStr = episode.number.toString().padStart(2, "0");
+  // If no results, try searching with the simplified query (without colon)
+  if (results.length === 0 && simplifiedQuery) {
+    console.log(
+      `Trying search with simplified title (without colon): "${simplifiedQuery}"`
+    );
+    results = await searchHellspy(simplifiedQuery);
+  }
 
-      // First try with the full format
-      searchQuery = `${name} S${seasonStr}E${episodeStr}`;
+  // If no results, try searching with the simplified additional query
+  if (results.length === 0 && simplifiedAdditionalQuery) {
+    console.log(
+      `Trying search with simplified title format: "${simplifiedAdditionalQuery}"`
+    );
+    results = await searchHellspy(simplifiedAdditionalQuery);
+  }
 
-      // Prepare a backup query format with just the name and episode identifier
-      additionalQuery = `${name} ${seasonStr}x${episodeStr}`;
-    } else if (type === "movie") {
-      // For movies, we can use the name and year
-      searchQuery = name + " " + year;
-      additionalQuery = name;
+  // If still no results, try a more generic search with just the enTitle from Wikidata
+  if (results.length === 0) {
+    const titleInfo = await getTitleFromWikidata(id);
+    if (titleInfo && titleInfo.enTitle && titleInfo.enTitle !== originalName) {
+      console.log(
+        `Trying alternate title from Wikidata: "${titleInfo.enTitle}"`
+      );
+
+      if (type === "series" && episode) {
+        // Format the search query for TV shows, e.g. "Show Name S01E05"
+        const seasonStr = episode.season.toString().padStart(2, "0");
+        const episodeStr = episode.number.toString().padStart(2, "0");
+
+        // First try with the full format
+        searchQuery = `${titleInfo.enTitle} S${seasonStr}E${episodeStr}`;
+
+        // Prepare a backup query format with just the name and episode identifier
+        additionalQuery = `${titleInfo.enTitle} ${seasonStr}x${episodeStr}`;
+      } else if (type === "movie") {
+        // For movies, we can use the name and year
+        searchQuery = titleInfo.enTitle + (year ? " " + year : "");
+        additionalQuery = titleInfo.enTitle;
+      }
+
+      // Try the alternate title queries
+      results = await searchHellspy(searchQuery);
+
+      if (results.length === 0 && additionalQuery) {
+        results = await searchHellspy(additionalQuery);
+      }
+
+      // If the alternate title contains a colon, try without it
+      if (results.length === 0 && titleInfo.enTitle.includes(":")) {
+        const altSimplifiedName = titleInfo.enTitle.split(":")[0].trim();
+        console.log(
+          `Trying simplified alternate title: "${altSimplifiedName}"`
+        );
+
+        if (type === "series" && episode) {
+          const seasonStr = episode.season.toString().padStart(2, "0");
+          const episodeStr = episode.number.toString().padStart(2, "0");
+
+          results = await searchHellspy(
+            `${altSimplifiedName} S${seasonStr}E${episodeStr}`
+          );
+
+          if (results.length === 0) {
+            results = await searchHellspy(
+              `${altSimplifiedName} ${seasonStr}x${episodeStr}`
+            );
+          }
+        } else if (type === "movie") {
+          results = await searchHellspy(
+            altSimplifiedName + (year ? " " + year : "")
+          );
+
+          if (results.length === 0) {
+            results = await searchHellspy(altSimplifiedName);
+          }
+        }
+      }
     }
   }
-
-  // An attempt to search Hellspy with the initial query
-  results = await searchHellspy(searchQuery);
-
-  // If no results, try searching with the additional query
-  if (results.length === 0 && additionalQuery) {
-    results = await searchHellspy(additionalQuery);
-  }
-
-  // If still no results, try a more generic search with just the enTitle
-  const titleInfo = await getTitleFromWikidata(id);
-  if (results.length === 0 && titleInfo.enTitle.length !== 0) {
-    if (type === "series" && episode) {
-      // Format the search query for TV shows, e.g. "Show Name S01E05"
-      const seasonStr = episode.season.toString().padStart(2, "0");
-      const episodeStr = episode.number.toString().padStart(2, "0");
-
-      // First try with the full format
-      searchQuery = `${titleInfo.enTitle} S${seasonStr}E${episodeStr}`;
-
-      // Prepare a backup query format with just the name and episode identifier
-      additionalQuery = `${titleInfo.enTitle} ${seasonStr}x${episodeStr}`;
-    } else if (type === "movie") {
-      // For movies, we can use the name and year
-      searchQuery = titleInfo.enTitle + " " + year;
-      additionalQuery = titleInfo.enTitle;
-    }
-  }
-
-  // An attempt to search Hellspy with the initial query
-  results = await searchHellspy(searchQuery);
-
-  // If no results, try searching with the additional query
-  if (results.length === 0 && additionalQuery) {
-    results = await searchHellspy(additionalQuery);
-  }
-
-  // If still no results, try a more generic search with just the name
+  // If still no results, try a more generic search with just the name or simplified name
   if (results.length === 0 && type === "series" && episode) {
-    const simpleQuery = name;
+    // Try the original name as a fallback
+    const simpleQuery = originalName;
     console.log(
       `No results found with specific episode query, trying generic search for: "${simpleQuery}"`
     );
 
-    const genericResults = await searchHellspy(simpleQuery);
+    let genericResults = await searchHellspy(simpleQuery);
+
+    // If no results with original name, try the simplified name
+    if (genericResults.length === 0 && simplifiedName !== originalName) {
+      console.log(
+        `No results with original name, trying generic search for simplified name: "${simplifiedName}"`
+      );
+      genericResults = await searchHellspy(simplifiedName);
+    }
 
     // Filter results to try to match the season and episode
     results = genericResults.filter((result) => {
