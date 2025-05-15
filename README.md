@@ -40,6 +40,32 @@ This addon allows you to search and stream content from Hellspy.to directly in S
 4. Use the search function to find content on Hellspy.to
 5. Select an item and stream it
 
+## Configuration
+
+This addon uses the following environment variables to configure proxy settings for accessing Hellspy.to content from outside the Czech Republic:
+
+| Variable | Description |
+|----------|-------------|
+| `CZECH_PROXY_HOST` | The hostname or IP address of a Czech proxy server |
+| `CZECH_PROXY_PORT` | The port number of the proxy server |
+| `CZECH_PROXY_USERNAME` | (Optional) Username for proxy authentication |
+| `CZECH_PROXY_PASSWORD` | (Optional) Password for proxy authentication |
+
+You can set these environment variables before starting the addon. For example:
+
+```bash
+# Set proxy configuration
+export CZECH_PROXY_HOST=your-czech-proxy.com
+export CZECH_PROXY_PORT=8080
+export CZECH_PROXY_USERNAME=username  # if your proxy requires authentication
+export CZECH_PROXY_PASSWORD=password  # if your proxy requires authentication
+
+# Start the addon
+npm start
+```
+
+The addon will automatically detect if you're already in the Czech Republic and only use the proxy when needed.
+
 ## Notes
 
 - This addon doesn't download files but streams them through stremio-local-addon
@@ -51,5 +77,3 @@ This addon allows you to search and stream content from Hellspy.to directly in S
 ## License
 
 This project is licensed under the GNU General Public License v2.0 - see the [LICENSE](LICENSE) file for details.
-
-Made by Dominik Pašek.
