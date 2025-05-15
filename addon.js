@@ -294,6 +294,10 @@ builder.defineStreamHandler(async ({ type, id, name, episode, year }) => {
         const parts = name.split(':');
         name = parts[0].trim();
         if (type === 'series' && episode) {
+            // Format the search query for TV shows, e.g. "Show Name S01E05"
+            const seasonStr = episode.season.toString().padStart(2, '0');
+            const episodeStr = episode.number.toString().padStart(2, '0');
+            
             // First try with the full format
             searchQuery = `${name} S${seasonStr}E${episodeStr}`;
         
