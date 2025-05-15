@@ -181,67 +181,46 @@ async function getStreamUrl(videoId, hash) {
 // Get title information from Wikidata using SPARQL and IMDb ID
 async function getTitleFromWikidata(imdbId) {
   try {
-    console.log(
-      `Fetching title information for ${imdbId} from Wikidata SPARQL endpoint`
-    );
+    console.log(`Fetching Czech and English titles for ${imdbId} from Wikidata SPARQL endpoint`);
 
-    const query = `
-            SELECT ?film ?filmLabelCS ?filmLabelEN ?originalTitle ?publicationDate ?instanceLabelCS ?instanceLabelEN WHERE {
-                ?film wdt:P345 "${imdbId}".
-                OPTIONAL { ?film wdt:P1476 ?originalTitle. }
-                OPTIONAL { ?film wdt:P577 ?publicationDate. }
-                OPTIONAL { ?film wdt:P31 ?instance. }
+    const baseQuery = (lang) => `
+      SELECT ?film ?filmLabel ?originalTitle ?publicationDate ?instanceLabel WHERE {
+        ?film wdt:P345 "${imdbId}".
+        OPTIONAL { ?film wdt:P1476 ?originalTitle. }
+        OPTIONAL { ?film wdt:P577 ?publicationDate. }
+        OPTIONAL { ?film wdt:P31 ?instance. }
 
-                OPTIONAL {
-                    ?film rdfs:label ?filmLabelCS.
-                    FILTER (lang(?filmLabelCS) = "cs")
-                }
-                OPTIONAL {
-                    ?film rdfs:label ?filmLabelEN.
-                    FILTER (lang(?filmLabelEN) = "en")
-                }
-                OPTIONAL {
-                    ?instance rdfs:label ?instanceLabelCS.
-                    FILTER (lang(?instanceLabelCS) = "cs")
-                }
-                OPTIONAL {
-                    ?instance rdfs:label ?instanceLabelEN.
-                    FILTER (lang(?instanceLabelEN) = "en")
-                }
-            }
-        `;
+        SERVICE wikibase:label {
+          bd:serviceParam wikibase:language "${lang}".
+        }
+      }
+    `;
 
     const url = "https://query.wikidata.org/sparql";
     const headers = { Accept: "application/sparql-results+json" };
 
-    const response = await axios.get(url, {
-      // Use default axios here, no proxy needed for Wikidata
-      params: { query },
-      headers,
-    });
+    const [czResponse, enResponse] = await Promise.all([
+      axios.get(url, { params: { query: baseQuery("cs") }, headers }),
+      axios.get(url, { params: { query: baseQuery("en") }, headers }),
+    ]);
 
-    const results = response.data.results.bindings;
+    const czResult = czResponse.data.results.bindings[0] || {};
+    const enResult = enResponse.data.results.bindings[0] || {};
 
-    if (results.length > 0) {
-      const result = results[0];
-      const czTitle = result.filmLabelCS?.value || null;
-      const enTitle = result.filmLabelEN?.value || null;
-      const originalTitle = result.originalTitle?.value || null;
-      const year = result.publicationDate?.value?.substring(0, 4) || null;
-      const type = result.instanceLabel?.value || null;
+    const czTitle = czResult.filmLabel?.value || null;
+    const enTitle = enResult.filmLabel?.value || null;
+    const originalTitle = czResult.originalTitle?.value || enResult.originalTitle?.value || null;
+    const year = czResult.publicationDate?.value?.substring(0, 4) || enResult.publicationDate?.value?.substring(0, 4) || null;
+    const type = czResult.instanceLabel?.value || enResult.instanceLabel?.value || null;
 
-      console.log(`Found title: ${originalTitle} (${year})`);
-      return {
-        czTitle,
-        enTitle,
-        originalTitle,
-        year,
-        type,
-      };
-    } else {
-      console.log(`No title information found for ${imdbId}`);
-      return null;
-    }
+    console.log(`Found titles: CZ: ${czTitle}, EN: ${enTitle}, Year: ${year}`);
+    return {
+      czTitle,
+      enTitle,
+      originalTitle,
+      year,
+      type,
+    };
   } catch (error) {
     console.error(`Error fetching title information for ${imdbId}:`, error);
     return null;
