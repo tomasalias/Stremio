@@ -318,6 +318,7 @@ builder.defineStreamHandler(async ({ type, id, name, episode, year }) => {
   }
 
   // If still no results, try a more generic search with just the enTitle
+  const titleInfo = await getTitleFromWikidata(id);
   if (results.length === 0 && titleInfo.enTitle.length !== 0) {
     if (type === "series" && episode) {
       // Format the search query for TV shows, e.g. "Show Name S01E05"
