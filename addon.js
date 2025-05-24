@@ -52,14 +52,53 @@ async function getStreamUrl(id, fileHash) {
     }
   }
   try {
+    console.log(
+      `Fetching stream URL for video ID ${id} with hash ${fileHash}...`
+    );
     const response = await axios.get(
       `https://api.hellspy.to/gw/video/${id}/${fileHash}`
     );
+
+    // Get video details for additional information
+    const title = response.data.title || "";
+    const duration = response.data.duration || 0;
+    console.log(
+      `Found video: "${title}" (Duration: ${Math.floor(duration / 60)}m ${
+        duration % 60
+      }s)`
+    );
+
+    // Extract available stream qualities
     const conversions = response.data.conversions || {};
+
+    // If no conversions are available, try the direct download link as a fallback
+    if (Object.keys(conversions).length === 0 && response.data.download) {
+      console.log(
+        "No conversions available, using direct download link as fallback"
+      );
+      const streams = [
+        {
+          url: response.data.download,
+          quality: "original",
+          title: title,
+        },
+      ];
+      searchCache.set(cacheKey, { url: streams, timestamp: Date.now() });
+      return streams;
+    }
+
+    // Map conversions to stream format
     const streams = Object.entries(conversions).map(([quality, url]) => ({
       url,
       quality: quality + "p",
+      title: title,
     }));
+
+    console.log(
+      `Found ${streams.length} quality options: ${streams
+        .map((s) => s.quality)
+        .join(", ")}`
+    );
     searchCache.set(cacheKey, { url: streams, timestamp: Date.now() });
     return streams;
   } catch (error) {
@@ -141,6 +180,8 @@ function getSeasonEpisodePatterns(season, episode) {
   return [
     `S${seasonStr}E${episodeStr}`,
     `${seasonStr}x${episodeStr}`,
+    ` - ${episodeStr}`, // Format found on PC: "Title - 01"
+    ` - ${parseInt(episodeStr, 10)}`, // Non-zero padded version: "Title - 1"
     `Ep. ${episodeStr}`,
     `Ep ${episodeStr}`,
     `Episode ${episodeStr}`,
@@ -154,7 +195,8 @@ function isLikelyEpisode(title) {
   const upperTitle = title.toUpperCase();
   return (
     /\bS\d{2}E\d{2}\b/.test(upperTitle) ||
-    /\b\d{1,2}x\d{1,2}\b/.test(upperTitle)
+    /\b\d{1,2}x\d{1,2}\b/.test(upperTitle) ||
+    /\s-\s\d{1,2}\b/.test(upperTitle) // "Title - 01" format
   );
 }
 
@@ -163,17 +205,26 @@ async function searchSeriesWithPattern(queries, season, episode) {
   for (const query of queries) {
     if (!query) continue;
     const results = await searchHellspy(query);
-    // Try strict patterns first
+    // Try strict patterns first (SxxExx, xxXxx)
     let filtered = results.filter((r) =>
       patterns
         .slice(0, 2)
         .some((p) => r.title && r.title.toUpperCase().includes(p.toUpperCase()))
     );
     if (filtered.length > 0) return filtered;
+
+    // Try "Title - XX" format specifically
+    filtered = results.filter((r) =>
+      patterns
+        .slice(2, 4)
+        .some((p) => r.title && r.title.toUpperCase().includes(p.toUpperCase()))
+    );
+    if (filtered.length > 0) return filtered;
+
     // Fallback: allow looser episode number match
     filtered = results.filter((r) =>
       patterns
-        .slice(2)
+        .slice(4)
         .some((p) => r.title && r.title.toUpperCase().includes(p.toUpperCase()))
     );
     if (filtered.length > 0) return filtered;
@@ -232,19 +283,25 @@ builder.defineStreamHandler(async ({ type, id, name, episode, year }) => {
   let simplifiedAdditionalQuery = null;
   let episodeNumberOnlyQuery = null;
   let simplifiedEpisodeNumberOnlyQuery = null;
-
   if (type === "series" && name && episode) {
     const seasonStr = episode.season.toString().padStart(2, "0");
     const episodeStr = episode.number.toString().padStart(2, "0");
     searchQuery = `${name} S${seasonStr}E${episodeStr}`;
     additionalQuery = `${name} ${seasonStr}x${episodeStr}`;
+
+    // Add anime-style "Title - XX" format which is common for anime releases
+    const animeStyleQuery = `${name} - ${episodeStr}`;
+
     let classicBase = name.replace(/[:&]/g, "").replace(/\s+/g, " ").trim();
     classicQuery = `${classicBase} ${episodeStr}`;
     // Add query with episode as a two-digit string (e.g. 04 for S01E04)
     episodeNumberOnlyQuery = `${classicBase} ${episodeStr}`;
+
     if (simplifiedName !== name) {
       simplifiedQuery = `${simplifiedName} S${seasonStr}E${episodeStr}`;
       simplifiedAdditionalQuery = `${simplifiedName} ${seasonStr}x${episodeStr}`;
+      // Also add anime-style query for simplified name
+      const simplifiedAnimeStyleQuery = `${simplifiedName} - ${episodeStr}`;
       simplifiedEpisodeNumberOnlyQuery = `${simplifiedName
         .replace(/[:&]/g, "")
         .replace(/\s+/g, " ")
@@ -262,16 +319,22 @@ builder.defineStreamHandler(async ({ type, id, name, episode, year }) => {
 
   let results = [];
   if (type === "series" && episode) {
-    // Try all queries in order, only keep those with matching SxxExx or xxXxx in title
+    // Try all queries in order, including anime-style format
     const queries = [
       searchQuery,
       additionalQuery,
+      // Include anime-style "Title - XX" format which is common for anime releases
+      `${name} - ${episode.number.toString().padStart(2, "0")}`,
       episodeNumberOnlyQuery,
       simplifiedQuery,
       simplifiedAdditionalQuery,
+      // Add anime-style for simplified name
+      simplifiedName !== name
+        ? `${simplifiedName} - ${episode.number.toString().padStart(2, "0")}`
+        : null,
       classicQuery,
       simplifiedEpisodeNumberOnlyQuery,
-    ];
+    ].filter(Boolean); // Remove null values
     results = await searchSeriesWithPattern(
       queries,
       episode.season,
@@ -289,22 +352,20 @@ builder.defineStreamHandler(async ({ type, id, name, episode, year }) => {
         const altSimplified = altName.includes(":")
           ? altName.split(":")[0].trim()
           : null;
+        const seasonStr = episode.season.toString().padStart(2, "0");
+        const episodeStr = episode.number.toString().padStart(2, "0");
         const altQueries = [
-          `${altName} S${episode.season
-            .toString()
-            .padStart(2, "0")}E${episode.number.toString().padStart(2, "0")}`,
-          `${altName} ${episode.season
-            .toString()
-            .padStart(2, "0")}x${episode.number.toString().padStart(2, "0")}`,
+          `${altName} S${seasonStr}E${episodeStr}`,
+          `${altName} ${seasonStr}x${episodeStr}`,
+          // Add anime-style format for alternate title
+          `${altName} - ${episodeStr}`,
         ];
         if (altSimplified) {
           altQueries.push(
-            `${altSimplified} S${episode.season
-              .toString()
-              .padStart(2, "0")}E${episode.number.toString().padStart(2, "0")}`,
-            `${altSimplified} ${episode.season
-              .toString()
-              .padStart(2, "0")}x${episode.number.toString().padStart(2, "0")}`
+            `${altSimplified} S${seasonStr}E${episodeStr}`,
+            `${altSimplified} ${seasonStr}x${episodeStr}`,
+            // Add anime-style format for simplified alternate title
+            `${altSimplified} - ${episodeStr}`
           );
         }
         results = await searchSeriesWithPattern(
@@ -390,27 +451,40 @@ builder.defineStreamHandler(async ({ type, id, name, episode, year }) => {
       }
     }
   }
-
   // If no results found, try searching with the original name
   if (results.length === 0 && type === "series" && episode) {
-    const simpleQuery = originalName;
     console.log(
-      `No results found with specific episode query, trying generic search for: "${simpleQuery}"`
+      `No results found with specific episode query, trying generic search...`
     );
 
-    let genericResults = await searchHellspy(simpleQuery);
+    // Try multiple search approaches for generic search
+    const genericQueries = [
+      originalName, // Original full name
+      simplifiedName, // Simplified name (without subtitle)
+      originalName.split(" ").slice(0, 2).join(" "), // First two words only
+      simplifiedName.split(" ").slice(0, 2).join(" "), // First two words of simplified name
+    ].filter((q, i, self) => q && self.indexOf(q) === i); // Remove duplicates and empties
 
-    if (genericResults.length === 0 && simplifiedName !== originalName) {
-      console.log(
-        `No results with original name, trying generic search for simplified name: "${simplifiedName}"`
-      );
-      genericResults = await searchHellspy(simplifiedName);
+    let genericResults = [];
+
+    // Try each generic query
+    for (const query of genericQueries) {
+      console.log(`Searching for generic title: "${query}"`);
+      const queryResults = await searchHellspy(query);
+      genericResults.push(...queryResults);
+      if (queryResults.length > 0) {
+        console.log(
+          `Found ${queryResults.length} results with query "${query}"`
+        );
+        break; // Stop if we found results
+      }
     }
 
     // Filter results based on the season and episode information
     const patterns = getSeasonEpisodePatterns(episode.season, episode.number);
     results = genericResults.filter((result) => {
-      const title = result.title?.toUpperCase() || "";
+      if (!result.title) return false;
+      const title = result.title.toUpperCase();
       return patterns.some((p) => title.includes(p.toUpperCase()));
     });
   }
@@ -423,16 +497,36 @@ builder.defineStreamHandler(async ({ type, id, name, episode, year }) => {
 
   const streams = [];
   const processedResults = [];
-
   // Filter results based on the type and episode information
   if (type === "series" && episode) {
     const patterns = getSeasonEpisodePatterns(episode.season, episode.number);
-    processedResults.push(
-      ...results.filter((result) => {
-        const title = result.title?.toUpperCase() || "";
-        return patterns.some((p) => title.includes(p.toUpperCase()));
-      })
+
+    // Add a special check for anime-style titles that exactly match the pattern we see in your local results
+    // E.g. "So I'm a Spider, So What - 01"
+    const exactAnimePattern = ` - ${episode.number
+      .toString()
+      .padStart(2, "0")}$`;
+    const exactAnimeRegex = new RegExp(exactAnimePattern, "i");
+
+    const animeMatches = results.filter(
+      (result) => result.title && exactAnimeRegex.test(result.title)
     );
+
+    // If we found exact anime-style matches, prioritize those
+    if (animeMatches.length > 0) {
+      console.log(
+        `Found ${animeMatches.length} results with anime-style pattern "${exactAnimePattern}"`
+      );
+      processedResults.push(...animeMatches);
+    } else {
+      // Otherwise use the regular pattern matching
+      processedResults.push(
+        ...results.filter((result) => {
+          const title = result.title?.toUpperCase() || "";
+          return patterns.some((p) => title.includes(p.toUpperCase()));
+        })
+      );
+    }
   } else if (type === "movie") {
     // Filter out likely episode results
     processedResults.push(
@@ -441,8 +535,33 @@ builder.defineStreamHandler(async ({ type, id, name, episode, year }) => {
   } else {
     processedResults.push(...results);
   }
+  // Sort results to prioritize anime-style titles for anime content
+  if (type === "series" && processedResults.length > 1) {
+    const animePattern = ` - ${episode.number.toString().padStart(2, "0")}`;
 
-  // Show the first 10 results
+    processedResults.sort((a, b) => {
+      const aTitle = a.title || "";
+      const bTitle = b.title || "";
+      const aHasAnimePattern = aTitle.includes(animePattern);
+      const bHasAnimePattern = bTitle.includes(animePattern);
+
+      if (aHasAnimePattern && !bHasAnimePattern) return -1;
+      if (!aHasAnimePattern && bHasAnimePattern) return 1;
+
+      // If same pattern status, prioritize by size (larger files often better quality)
+      return (b.size || 0) - (a.size || 0);
+    });
+  }
+
+  // Show results for debugging
+  console.log(`Found ${processedResults.length} matching results:`);
+  processedResults
+    .slice(0, 5)
+    .forEach((r) =>
+      console.log(`- ${r.title} (Size: ${Math.floor(r.size / 1024 / 1024)} MB)`)
+    );
+
+  // Limit to top 10 results after sorting
   const limitedResults = processedResults.slice(0, 10);
 
   // Process each result and get the stream URL
@@ -454,11 +573,17 @@ builder.defineStreamHandler(async ({ type, id, name, episode, year }) => {
     try {
       const streamInfo = await getStreamUrl(result.id, result.fileHash);
       if (Array.isArray(streamInfo) && streamInfo.length > 0) {
+        // Format file size for display
+        const sizeGB = result.size
+          ? (result.size / 1024 / 1024 / 1024).toFixed(2) + " GB"
+          : "Unknown size";
+
         for (const s of streamInfo) {
           streams.push({
             url: s.url,
             quality: s.quality,
-            title: result.title, // add full title for Stremio display
+            title: `${result.title} [${s.quality}] [${sizeGB}]`, // add full title, quality and size for Stremio display
+            name: `Hellspy - ${s.quality}`,
           });
         }
       }
