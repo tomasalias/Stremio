@@ -1,0 +1,25 @@
+{
+  "name": "stremio-hellspy-addon",
+  "version": "0.0.1",
+  "description": "Hellspy.to addon for Stremio",
+  "main": "addon.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "keywords": [
+    "stremio",
+    "addon",
+    "hellspy",
+    "stream",
+    "video"
+  ],
+  "author": "",
+  "license": "GPL-2.0",
+  "dependencies": {
+    "stremio-addon-sdk": "^1.6.10",
+    "axios": "^0.24.0"
+  },
+  "engines": {
+    "node": ">=14.0.0"
+  }
+}
