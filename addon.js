@@ -4,7 +4,7 @@ const axios = require("axios");
 // Create a new addon builder instance
 const builder = new addonBuilder({
   id: "org.stremio.hellspy",
-  version: "0.0.1",
+  version: "0.0.2",
   name: "Hellspy",
   description: "Hellspy.to addon for Stremio",
   resources: ["stream"],
