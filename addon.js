@@ -570,27 +570,91 @@ builder.defineStreamHandler(async ({ type, id, name, episode, year }) => {
       console.warn("Skipping result due to missing id or fileHash:", result);
       continue;
     }
-    try {
-      const streamInfo = await getStreamUrl(result.id, result.fileHash);
-      if (Array.isArray(streamInfo) && streamInfo.length > 0) {
-        // Format file size for display
-        const sizeGB = result.size
-          ? (result.size / 1024 / 1024 / 1024).toFixed(2) + " GB"
-          : "Unknown size";
+    
+  try {
+  const streamInfo = await getStreamUrl(result.id, result.fileHash)
 
-        for (const s of streamInfo) {
-          streams.push({
-            url: s.url,
-            quality: s.quality,
-            title: `${result.title} [${s.quality}] [${sizeGB}]`, // add full title, quality and size for Stremio display
-            name: `Hellspy - ${s.quality}`,
-          });
-        }
-      }
-    } catch (error) {
-      console.error("Error processing result:", error);
+
+  const sizeGB = result.size ? `${(result.size / (1024 ** 3)).toFixed(2)} GB` : '???';
+
+
+  const titleLC = result.title.toLowerCase();
+  const langs = [];
+if (/cz|czech/.test(titleLC)) langs.push('🇨🇿');
+if (/sk|slovak/.test(titleLC)) langs.push('🇸🇰');
+if (/en|english/.test(titleLC)) langs.push('🇬🇧');
+
+const lang = langs.length > 0 ? langs.join(' + ') : '🌐 Neznámy';
+
+  const subs = [];
+if (/sub|tit|titulky/.test(titleLC)) {
+  if (/cz/.test(titleLC)) subs.push('🇨🇿');
+  if (/sk/.test(titleLC)) subs.push('🇸🇰');
+  if (/en/.test(titleLC)) subs.push('🇬🇧');
+}
+const subtitles = subs.length > 0 ? subs.join(' + ') : '❌ Bez titulkov';
+
+  const qualityMatch = result.title.match(/(4k|2160p|1080p|720p|480p)/i);
+  let quality = 'Neznáma kvalita';
+
+  if (qualityMatch) {
+    const q = qualityMatch[0].toLowerCase();
+    switch (q) {
+      case '4k':
+      case '2160p':
+        quality = '2160p / 4K';
+        break;
+      case '1080p':
+        quality = '1080p / FullHD';
+        break;
+      case '720p':
+        quality = '720p / HD';
+        break;
+      case '480p':
+        quality = '480p / SD';
+        break;
     }
   }
+
+  let titleClean = result.title
+  .replace(/^.*?\|\s*/, '')
+  .replace(/\sby\w+/i, '') 
+
+  .replace(/\b(HDRip|HDTV|BluRay|WEB[-_. ]?DL|WEBRip|DVDRip|x264|x265|HEVC|H\.?264|H\.?265|AC3|DTS|AAC|MP3|5\.1|7\.1|Proper|Repack|Extended|Unrated|Rip|CAM|TS|TC|HDR|SD|HD|FullHD|4K|2160p|1080p|720p|480p|TOPKVALITA)\b/gi, '')
+
+  .replace(/\(\s*\d*\s*\)/g, ''
+  .replace(/[\.\_\-]/g, ' ')
+  .replace(/\s+/g, ' ')
+  .trim();
+const yearMatch = titleClean.match(/\b(19|20)\d{2}\b/);
+const year = yearMatch ? yearMatch[0] : '';
+    
+titleClean = titleClean.replace(year, '').trim();
+
+  
+ const seMatch = result.title.match(/S\d{1,2}E\d{1,2}/i);
+  const se = seMatch ? ` ${seMatch[0].toUpperCase()}` : '';
+
+  titleClean = `🔥 Hellspy | ${titleClean}${year}${se}`.trim();
+
+  if (Array.isArray(streamInfo) && streamInfo.length > 0) {
+    for (const s of streamInfo) {
+      streams.push({
+      url: s.url,
+      name: titleClean,
+      title:
+        `📦 Veľkosť: ${sizeGB}\n` +
+        `🎞️ Kvalita: ${quality}\n` +
+        `🗣️ Jazyk: ${lang}\n` +
+        `💬 ${subtitles}`,
+      });
+    }
+  }
+} catch (error) {
+  console.error('Chyba pri načítaní streamu:', error);
+}
+
+}
   if (streams.length > 0) {
     return { streams };
   }
