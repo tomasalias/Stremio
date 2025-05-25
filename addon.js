@@ -622,7 +622,7 @@ const subtitles = subs.length > 0 ? subs.join(' + ') : '❌ Bez titulkov';
 
   .replace(/\b(HDRip|HDTV|BluRay|WEB[-_. ]?DL|WEBRip|DVDRip|x264|x265|HEVC|H\.?264|H\.?265|AC3|DTS|AAC|MP3|5\.1|7\.1|Proper|Repack|Extended|Unrated|Rip|CAM|TS|TC|HDR|SD|HD|FullHD|4K|2160p|1080p|720p|480p|TOPKVALITA)\b/gi, '')
 
-  .replace(/\(\s*\d*\s*\)/g, ''
+  .replace(/\(\s*\d*\s*\)/g, '')
   .replace(/[\.\_\-]/g, ' ')
   .replace(/\s+/g, ' ')
   .trim();
