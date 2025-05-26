@@ -1,10 +1,12 @@
 # Stremio Hellspy.to Addon
 
-This addon allows you to search and stream content from Hellspy.to directly in Stremio.
+This addon allows you to search and stream content from Hellspy.to directly in Stremio, with enhanced metadata from TMDb (The Movie Database).
 
 ## Features
 
 - Search for movies and series on Hellspy.to
+- Enhanced metadata using TMDb API (when API key is provided)
+- Fallback to Wikidata for metadata when TMDb API key is not available
 - Stream content directly in Stremio (requires stremio-local-addon)
 - No login required
 
@@ -23,7 +25,15 @@ This addon allows you to search and stream content from Hellspy.to directly in S
    ```
    npm install
    ```
-5. Start the addon:
+5. (Optional) Set up TMDb API:
+   - Get your [TMDb API key](https://www.themoviedb.org/settings/api)
+   - Set the environment variable:
+   ```
+   set TMDB_API_KEY=your_api_key_here   # On Windows
+   export TMDB_API_KEY=your_api_key_here # On Linux/macOS
+   ```
+   
+6. Start the addon:
    ```
    npm start
    ```

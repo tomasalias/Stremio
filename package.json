@@ -1,10 +1,13 @@
 {
   "name": "stremio-hellspy-addon",
-  "version": "0.0.1",
-  "description": "Hellspy.to addon for Stremio",
+  "version": "0.1.0",
+  "description": "Hellspy.to addon for Stremio with TMDb metadata",
   "main": "addon.js",
   "scripts": {
-    "start": "node server.js"
+    "start": "node server.js",
+    "setup-tmdb": "node setup-tmdb.js",
+    "start:dev": "nodemon server.js",
+    "test:env": "node test-env.js"
   },
   "keywords": [
     "stremio",
@@ -16,8 +19,9 @@
   "author": "",
   "license": "GPL-2.0",
   "dependencies": {
-    "stremio-addon-sdk": "^1.6.10",
-    "axios": "^0.24.0"
+    "axios": "^0.24.0",
+    "dotenv": "^16.5.0",
+    "stremio-addon-sdk": "^1.6.10"
   },
   "engines": {
     "node": ">=14.0.0"
