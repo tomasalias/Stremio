@@ -288,34 +288,85 @@ async function getEpisodeFromTMDb(tmdbId, season, episode) {
 function getSeasonEpisodePatterns(season, episode) {
   const seasonStr = season.toString().padStart(2, "0");
   const episodeStr = episode.toString().padStart(2, "0");
+  const nonPaddedEpisode = parseInt(episodeStr, 10);
+
   return [
+    // Standard TV formats
     `S${seasonStr}E${episodeStr}`,
     `${seasonStr}x${episodeStr}`,
-    ` - ${episodeStr}`, // Format found on PC: "Title - 01"
-    ` - ${parseInt(episodeStr, 10)}`, // Non-zero padded version: "Title - 1"
+
+    // Anime-specific formats
+    ` - ${episodeStr}`, // "Title - 01"
+    ` - ${nonPaddedEpisode}`, // "Title - 1"
+    `#${episodeStr}`, // "Title #01"
+    `#${nonPaddedEpisode}`, // "Title #1"
+
+    // Common descriptive formats
     `Ep. ${episodeStr}`,
     `Ep ${episodeStr}`,
     `Episode ${episodeStr}`,
-    ` ${episodeStr} `, // surrounded by spaces
-    ` ${parseInt(episodeStr, 10)} `, // non-padded
+    `Episode ${nonPaddedEpisode}`,
+
+    // Standalone numbers (surrounded by spaces or symbols)
+    ` ${episodeStr} `,
+    ` ${nonPaddedEpisode} `,
+    `[${episodeStr}]`,
+    `[${nonPaddedEpisode}]`,
+
+    // Japanese style episode notation
+    `第${nonPaddedEpisode}話`, // "dai X wa" format
+    `第${nonPaddedEpisode}集`, // "dai X shu" format
   ];
+}
+
+// Import title utilities
+const {
+  getStaticAnimeNameVariations,
+  getAllTitleVariations,
+} = require("./title-utils");
+
+// Helper function to get common anime name variations
+// This is kept for backward compatibility
+function getAnimeNameVariations(title) {
+  return getStaticAnimeNameVariations(title);
 }
 
 function isLikelyEpisode(title) {
   if (!title) return false;
   const upperTitle = title.toUpperCase();
+
   return (
-    /\bS\d{2}E\d{2}\b/.test(upperTitle) ||
-    /\b\d{1,2}x\d{1,2}\b/.test(upperTitle) ||
-    /\s-\s\d{1,2}\b/.test(upperTitle) // "Title - 01" format
+    // Standard TV formats
+    /\bS\d{1,2}E\d{1,2}\b/.test(upperTitle) || // S01E01, S1E1
+    /\b\d{1,2}x\d{1,2}\b/.test(upperTitle) || // 01x01, 1x1
+    // Common anime formats
+    /\s-\s\d{1,2}\b/.test(upperTitle) || // "Title - 01"
+    /\s#\d{1,2}\b/.test(upperTitle) || // "Title #01"
+    /\[(\s)?\d{1,2}(\s)?\]/.test(upperTitle) || // "[01]" or "[ 01 ]"
+    // Japanese style formats
+    /第\d{1,2}[話集]/.test(title) || // "第1話" (episode 1)
+    // Other common patterns
+    /\bEP\.?\s\d{1,2}\b/i.test(upperTitle) || // "EP 01", "Ep. 01"
+    /\bEPISODE\s\d{1,2}\b/i.test(upperTitle) // "Episode 01"
   );
 }
 
 async function searchSeriesWithPattern(queries, season, episode) {
   const patterns = getSeasonEpisodePatterns(season, episode);
+  const allResults = [];
+
+  // Track which queries we've already tried to avoid duplicates
+  const triedQueries = new Set();
+
   for (const query of queries) {
-    if (!query) continue;
+    if (!query || triedQueries.has(query.toLowerCase())) continue;
+    triedQueries.add(query.toLowerCase());
+
+    console.log(`Trying query: "${query}"`);
     const results = await searchHellspy(query);
+    allResults.push(...results);
+
+    // Try standard episode patterns first (S01E01, 01x01)
     let filtered = results.filter((r) =>
       patterns
         .slice(0, 2)
@@ -323,7 +374,7 @@ async function searchSeriesWithPattern(queries, season, episode) {
     );
     if (filtered.length > 0) return filtered;
 
-    // Try "Title - XX" format specifically
+    // Try "Title - XX" format specifically (common in anime)
     filtered = results.filter((r) =>
       patterns
         .slice(2, 4)
@@ -339,6 +390,26 @@ async function searchSeriesWithPattern(queries, season, episode) {
     );
     if (filtered.length > 0) return filtered;
   }
+
+  // If we have results but couldn't find matching episodes,
+  // try one more pass looking for any episode pattern in all results
+  if (allResults.length > 0) {
+    console.log(
+      `Found ${allResults.length} total results, checking for episode patterns`
+    );
+    const filtered = allResults.filter((r) =>
+      patterns.some(
+        (p) => r.title && r.title.toUpperCase().includes(p.toUpperCase())
+      )
+    );
+    if (filtered.length > 0) {
+      console.log(
+        `Found ${filtered.length} matching episodes in combined results`
+      );
+      return filtered;
+    }
+  }
+
   return [];
 }
 
@@ -436,11 +507,27 @@ builder.defineStreamHandler(async ({ type, id, name, episode, year }) => {
 
   let results = [];
   if (type === "series" && episode) {
-    // Try all queries in order, including anime-style format
-    const queries = [
+    // Get anime name variations to improve search results
+    const animeVariations = getAnimeNameVariations(name);
+    const simplifiedVariations =
+      simplifiedName !== name ? getAnimeNameVariations(simplifiedName) : [];
+
+    console.log(
+      `Searching with ${animeVariations.length} name variations for "${name}"`
+    );
+    if (animeVariations.length > 1) {
+      console.log(
+        `Alternative names: ${animeVariations.slice(0, 3).join(", ")}${
+          animeVariations.length > 3 ? "..." : ""
+        }`
+      );
+    }
+
+    // Base queries with original name
+    const baseQueries = [
       searchQuery,
       additionalQuery,
-      // Include anime-style "Title - XX" format which is common for anime releases
+      // Anime-style query
       `${name} - ${episode.number.toString().padStart(2, "0")}`,
       episodeNumberOnlyQuery,
       simplifiedQuery,
@@ -450,7 +537,26 @@ builder.defineStreamHandler(async ({ type, id, name, episode, year }) => {
         : null,
       classicQuery,
       simplifiedEpisodeNumberOnlyQuery,
-    ].filter(Boolean); // Remove null values
+    ];
+
+    // Add queries with anime name variations
+    const variationQueries = [];
+    const seasonStr = episode.season.toString().padStart(2, "0");
+    const episodeStr = episode.number.toString().padStart(2, "0");
+
+    for (const variation of animeVariations) {
+      if (variation !== name && variation !== simplifiedName) {
+        variationQueries.push(
+          `${variation} S${seasonStr}E${episodeStr}`,
+          `${variation} ${seasonStr}x${episodeStr}`,
+          `${variation} - ${episodeStr}`,
+          `${variation} ${episodeStr}`
+        );
+      }
+    }
+
+    // Combine all queries and remove duplicates/null values
+    const queries = [...baseQueries, ...variationQueries].filter(Boolean);
     results = await searchSeriesWithPattern(
       queries,
       episode.season,
@@ -615,18 +721,32 @@ builder.defineStreamHandler(async ({ type, id, name, episode, year }) => {
       `No results found with specific episode query, trying generic search...`
     );
 
+    // Get anime name variations to enhance generic search
+    const animeVariations = getAnimeNameVariations(originalName);
+    console.log(
+      `Trying generic search with ${animeVariations.length} name variations`
+    );
+
     // Try multiple search approaches for generic search
-    const genericQueries = [
+    const baseQueries = [
       originalName, // Original full name
       simplifiedName, // Simplified name (without subtitle)
       originalName.split(" ").slice(0, 2).join(" "), // First two words only
       simplifiedName.split(" ").slice(0, 2).join(" "), // First two words of simplified name
+    ];
+
+    // Add alternative anime names to generic search queries
+    const allGenericQueries = [
+      ...baseQueries,
+      ...animeVariations.filter(
+        (v) => v !== originalName && v !== simplifiedName
+      ),
     ].filter((q, i, self) => q && self.indexOf(q) === i); // Remove duplicates and empties
 
     let genericResults = [];
 
     // Try each generic query
-    for (const query of genericQueries) {
+    for (const query of allGenericQueries) {
       console.log(`Searching for generic title: "${query}"`);
       const queryResults = await searchHellspy(query);
       genericResults.push(...queryResults);
@@ -637,7 +757,7 @@ builder.defineStreamHandler(async ({ type, id, name, episode, year }) => {
         break; // Stop if we found results
       }
     }
-
+    // Filter results based on the season and episode information
     const patterns = getSeasonEpisodePatterns(episode.season, episode.number);
     results = genericResults.filter((result) => {
       if (!result.title) return false;
