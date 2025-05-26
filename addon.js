@@ -1,12 +1,25 @@
+// Load environment variables from .env file
+require("dotenv").config();
+
 const { addonBuilder } = require("stremio-addon-sdk");
 const axios = require("axios");
 
-// Create a new addon builder instance
+// TMDb API configuration
+const TMDB_API_KEY = process.env.TMDB_API_KEY;
+const LANGUAGE = "cs-CZ"; // Czech language
+const TMDB_BASE = "https://api.themoviedb.org/3";
+const USE_TMDB = !!TMDB_API_KEY;
+
+console.log(`TMDb API Key: ${TMDB_API_KEY ? "Found" : "Not found"}`);
+console.log(`TMDb API is ${USE_TMDB ? "ENABLED" : "DISABLED"}`);
+
 const builder = new addonBuilder({
   id: "org.stremio.hellspy",
-  version: "0.0.1",
-  name: "Hellspy",
-  description: "Hellspy.to addon for Stremio",
+  version: "0.1.0",
+  name: USE_TMDB ? "Hellspy with TMDb" : "Hellspy",
+  description: USE_TMDB
+    ? "Hellspy.to addon for Stremio with enhanced TMDb metadata"
+    : "Hellspy.to addon for Stremio (TMDb metadata disabled)",
   resources: ["stream"],
   types: ["movie", "series"],
   idPrefixes: ["tt", "kitsu"],
@@ -59,7 +72,6 @@ async function getStreamUrl(id, fileHash) {
       `https://api.hellspy.to/gw/video/${id}/${fileHash}`
     );
 
-    // Get video details for additional information
     const title = response.data.title || "";
     const duration = response.data.duration || 0;
     console.log(
@@ -68,10 +80,8 @@ async function getStreamUrl(id, fileHash) {
       }s)`
     );
 
-    // Extract available stream qualities
     const conversions = response.data.conversions || {};
 
-    // If no conversions are available, try the direct download link as a fallback
     if (Object.keys(conversions).length === 0 && response.data.download) {
       console.log(
         "No conversions available, using direct download link as fallback"
@@ -87,7 +97,6 @@ async function getStreamUrl(id, fileHash) {
       return streams;
     }
 
-    // Map conversions to stream format
     const streams = Object.entries(conversions).map(([quality, url]) => ({
       url,
       quality: quality + "p",
@@ -114,7 +123,6 @@ async function getTitleFromWikidata(imdbId) {
       `Fetching Czech and English titles for ${imdbId} from Wikidata SPARQL endpoint`
     );
 
-    // Base SPARQL query to get film information
     const baseQuery = (lang) => `
       SELECT ?film ?filmLabel ?originalTitle ?publicationDate ?instanceLabel WHERE {
         ?film wdt:P345 "${imdbId}".
@@ -150,7 +158,6 @@ async function getTitleFromWikidata(imdbId) {
     const type =
       czResult.instanceLabel?.value || enResult.instanceLabel?.value || null;
 
-    // Check if the Czech title is a Wikidata entity ID (starts with Q followed by numbers)
     const isWikidataId = czTitle && /^Q\d+$/.test(czTitle);
     const validCzTitle = isWikidataId ? null : czTitle;
 
@@ -172,11 +179,115 @@ async function getTitleFromWikidata(imdbId) {
   }
 }
 
+// Get title information from TMDb using IMDb ID
+async function getTitleFromTMDb(imdbId) {
+  try {
+    console.log(`Fetching title information for ${imdbId} from TMDb API`);
+
+    const url = `${TMDB_BASE}/find/${imdbId}?api_key=${TMDB_API_KEY}&language=${LANGUAGE}&external_source=imdb_id`;
+    const response = await axios.get(url);
+    const data = response.data;
+
+    const movieResults = data.movie_results || [];
+    const tvResults = data.tv_results || [];
+
+    if (movieResults.length > 0) {
+      const movie = movieResults[0];
+      console.log(
+        `Found movie: ${movie.title} (${
+          movie.release_date?.substring(0, 4) || "Unknown year"
+        })`
+      );
+      return {
+        type: "movie",
+        czTitle: movie.title,
+        enTitle: movie.original_title,
+        originalTitle: movie.original_title,
+        year: movie.release_date?.substring(0, 4),
+        overview: movie.overview,
+        poster: movie.poster_path
+          ? `https://image.tmdb.org/t/p/w500${movie.poster_path}`
+          : null,
+        backdrop: movie.backdrop_path
+          ? `https://image.tmdb.org/t/p/original${movie.backdrop_path}`
+          : null,
+        tmdbId: movie.id,
+      };
+    } else if (tvResults.length > 0) {
+      const show = tvResults[0];
+      console.log(
+        `Found TV show: ${show.name} (${
+          show.first_air_date?.substring(0, 4) || "Unknown year"
+        })`
+      );
+      return {
+        type: "series",
+        czTitle: show.name,
+        enTitle: show.original_name,
+        originalTitle: show.original_name,
+        year: show.first_air_date?.substring(0, 4),
+        overview: show.overview,
+        poster: show.poster_path
+          ? `https://image.tmdb.org/t/p/w500${show.poster_path}`
+          : null,
+        backdrop: show.backdrop_path
+          ? `https://image.tmdb.org/t/p/original${show.backdrop_path}`
+          : null,
+        tmdbId: show.id,
+      };
+    }
+
+    console.log(`No results found on TMDb for ${imdbId}`);
+    return null;
+  } catch (error) {
+    console.error(
+      `Error fetching title information from TMDb for ${imdbId}:`,
+      error
+    );
+    return null;
+  }
+}
+
+// Get episode information from TMDb using TMDb ID
+async function getEpisodeFromTMDb(tmdbId, season, episode) {
+  if (!TMDB_API_KEY || !tmdbId) return null;
+
+  try {
+    console.log(
+      `Fetching episode S${season}E${episode} info for TMDb ID ${tmdbId}`
+    );
+    const url = `${TMDB_BASE}/tv/${tmdbId}/season/${season}/episode/${episode}?api_key=${TMDB_API_KEY}&language=${LANGUAGE}`;
+    const response = await axios.get(url);
+    const data = response.data;
+
+    if (!data || !data.name) {
+      console.log(`No episode data found for S${season}E${episode}`);
+      return null;
+    }
+
+    console.log(
+      `Found episode: ${data.name} (Air date: ${data.air_date || "Unknown"})`
+    );
+    return {
+      name: data.name,
+      overview: data.overview,
+      airDate: data.air_date,
+      episodeNumber: data.episode_number,
+      seasonNumber: data.season_number,
+      still: data.still_path
+        ? `https://image.tmdb.org/t/p/original${data.still_path}`
+        : null,
+    };
+  } catch (error) {
+    console.error(`Error fetching episode information from TMDb:`, error);
+    return null;
+  }
+}
+
 // Helper to extract season/episode patterns
 function getSeasonEpisodePatterns(season, episode) {
   const seasonStr = season.toString().padStart(2, "0");
   const episodeStr = episode.toString().padStart(2, "0");
-  // Add more flexible patterns for fallback
   return [
     `S${seasonStr}E${episodeStr}`,
     `${seasonStr}x${episodeStr}`,
@@ -205,7 +316,6 @@ async function searchSeriesWithPattern(queries, season, episode) {
   for (const query of queries) {
     if (!query) continue;
     const results = await searchHellspy(query);
-    // Try strict patterns first (SxxExx, xxXxx)
     let filtered = results.filter((r) =>
       patterns
         .slice(0, 2)
@@ -245,16 +355,24 @@ builder.defineStreamHandler(async ({ type, id, name, episode, year }) => {
       number: parseInt(parts[2]),
     };
   }
-
   // If the type is not provided, try to determine it from the ID
   if (!name && id.startsWith("tt")) {
-    const titleInfo = await getTitleFromWikidata(id);
+    let titleInfo = null;
+
+    if (USE_TMDB) {
+      titleInfo = await getTitleFromTMDb(id);
+    }
+
+    if (!titleInfo) {
+      titleInfo = await getTitleFromWikidata(id);
+    }
+
     if (titleInfo) {
       name = titleInfo.czTitle || titleInfo.enTitle || titleInfo.originalTitle;
       year = titleInfo.year;
 
       if (!type && titleInfo.type) {
-        type = titleInfo.type === "movie" ? "movie" : "series";
+        type = titleInfo.type;
       }
     }
   }
@@ -289,7 +407,6 @@ builder.defineStreamHandler(async ({ type, id, name, episode, year }) => {
     searchQuery = `${name} S${seasonStr}E${episodeStr}`;
     additionalQuery = `${name} ${seasonStr}x${episodeStr}`;
 
-    // Add anime-style "Title - XX" format which is common for anime releases
     const animeStyleQuery = `${name} - ${episodeStr}`;
 
     let classicBase = name.replace(/[:&]/g, "").replace(/\s+/g, " ").trim();
@@ -328,7 +445,6 @@ builder.defineStreamHandler(async ({ type, id, name, episode, year }) => {
       episodeNumberOnlyQuery,
       simplifiedQuery,
       simplifiedAdditionalQuery,
-      // Add anime-style for simplified name
       simplifiedName !== name
         ? `${simplifiedName} - ${episode.number.toString().padStart(2, "0")}`
         : null,
@@ -339,10 +455,26 @@ builder.defineStreamHandler(async ({ type, id, name, episode, year }) => {
       queries,
       episode.season,
       episode.number
-    );
-    // If still no results, try alternate title from Wikidata
+    ); // If still no results, try alternate title from TMDb or Wikidata
     if (results.length === 0) {
-      const titleInfo = await getTitleFromWikidata(id);
+      let titleInfo = null;
+      let episodeInfo = null;
+
+      if (USE_TMDB) {
+        titleInfo = await getTitleFromTMDb(id);
+
+        if (titleInfo && titleInfo.tmdbId && episode) {
+          episodeInfo = await getEpisodeFromTMDb(
+            titleInfo.tmdbId,
+            episode.season,
+            episode.number
+          );
+        }
+      }
+
+      if (!titleInfo) {
+        titleInfo = await getTitleFromWikidata(id);
+      }
       if (
         titleInfo &&
         titleInfo.enTitle &&
@@ -354,17 +486,31 @@ builder.defineStreamHandler(async ({ type, id, name, episode, year }) => {
           : null;
         const seasonStr = episode.season.toString().padStart(2, "0");
         const episodeStr = episode.number.toString().padStart(2, "0");
+
+        // Add specific episode title to improve search if available
+        const episodeTitle = episodeInfo?.name;
+        const episodeQueries = [];
+
+        if (episodeTitle) {
+          console.log(`Adding episode title to search: "${episodeTitle}"`);
+          episodeQueries.push(`${altName} ${episodeTitle}`, episodeTitle);
+
+          if (altSimplified) {
+            episodeQueries.push(`${altSimplified} ${episodeTitle}`);
+          }
+        }
+
         const altQueries = [
           `${altName} S${seasonStr}E${episodeStr}`,
           `${altName} ${seasonStr}x${episodeStr}`,
-          // Add anime-style format for alternate title
           `${altName} - ${episodeStr}`,
+          // Add episode title queries if available
+          ...episodeQueries,
         ];
         if (altSimplified) {
           altQueries.push(
             `${altSimplified} S${seasonStr}E${episodeStr}`,
             `${altSimplified} ${seasonStr}x${episodeStr}`,
-            // Add anime-style format for simplified alternate title
             `${altSimplified} - ${episodeStr}`
           );
         }
@@ -388,17 +534,29 @@ builder.defineStreamHandler(async ({ type, id, name, episode, year }) => {
     }
     if (results.length === 0 && classicQuery) {
       results = await searchHellspy(classicQuery);
-    }
-    // If no results found, try searching with the simplified name
+    } // If no results found, try searching with the simplified name
     if (results.length === 0) {
-      const titleInfo = await getTitleFromWikidata(id);
+      let titleInfo = null;
+
+      // Try TMDb API first if API key is available
+      if (USE_TMDB) {
+        titleInfo = await getTitleFromTMDb(id);
+      }
+
+      // Fall back to Wikidata if no results from TMDb or if TMDb is not available
+      if (!titleInfo) {
+        titleInfo = await getTitleFromWikidata(id);
+      }
+
       if (
         titleInfo &&
         titleInfo.enTitle &&
         titleInfo.enTitle !== originalName
       ) {
         console.log(
-          `Trying alternate title from Wikidata: "${titleInfo.enTitle}"`
+          `Trying alternate title from ${USE_TMDB ? "TMDb" : "Wikidata"}: "${
+            titleInfo.enTitle
+          }"`
         );
 
         if (type === "series" && episode) {
@@ -480,7 +638,6 @@ builder.defineStreamHandler(async ({ type, id, name, episode, year }) => {
       }
     }
 
-    // Filter results based on the season and episode information
     const patterns = getSeasonEpisodePatterns(episode.season, episode.number);
     results = genericResults.filter((result) => {
       if (!result.title) return false;
@@ -489,7 +646,6 @@ builder.defineStreamHandler(async ({ type, id, name, episode, year }) => {
     });
   }
 
-  // If no results found, try searching with the original name
   if (results.length === 0) {
     console.log("No matching streams found");
     return { streams: [] };
@@ -512,7 +668,6 @@ builder.defineStreamHandler(async ({ type, id, name, episode, year }) => {
       (result) => result.title && exactAnimeRegex.test(result.title)
     );
 
-    // If we found exact anime-style matches, prioritize those
     if (animeMatches.length > 0) {
       console.log(
         `Found ${animeMatches.length} results with anime-style pattern "${exactAnimePattern}"`
