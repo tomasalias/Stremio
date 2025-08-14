@@ -11,6 +11,10 @@ const builder = new addonBuilder({
   types: ["movie", "series"],
   idPrefixes: ["tt", "kitsu"],
   catalogs: [],
+  stremioAddonsConfig: {
+    issuer: "https://stremio-addons.net",
+    signature: "eyJhbGciOiJkaXIiLCJlbmMiOiJBMTI4Q0JDLUhTMjU2In0..Q3c1o6zGBTzcnwfyb57kMw.evFQ-ODwmOeZWPsJ2Zkx-S_EgSpekuJcSOgnrTUR8pPy9tGHSZHo0n2PaIr5kRag6A4GVxDQ5MEW2G-4w8sHVwjEyO9TIqJMHBbZ0xbItd83SmHtN9unjgIi3tgwf6xr.XxBTJoNyWmi89W67BhG4FA"
+  }
 });
 
 const searchCache = new Map();
