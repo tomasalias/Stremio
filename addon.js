@@ -586,7 +586,7 @@ builder.defineStreamHandler(async ({ type, id, name, episode, year }) => {
           streams.push({
             url: s.url,
             quality: s.quality,
-            title: `${result.title} [${s.quality}] [${sizeGB}]`, // add full title, quality and size for Stremio display
+            title: `${result.title}\n${s.quality} | ${sizeGB}`, // put quality and size on second line
             name: `Hellspy - ${s.quality}`,
           });
         }
