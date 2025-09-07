@@ -27,7 +27,7 @@ const RETRY_DELAY_BASE = 2000;
 
 const userQueue = [];
 const activeUsers = new Map(); // userId -> { processing: boolean, lastActivity: timestamp }
-const MAX_CONCURRENT_USERS = 3; // Maximum number of users processing at once
+const MAX_CONCURRENT_USERS = 1; // Maximum number of users processing at once
 const USER_TIMEOUT = 300000;
 
 let requestQueue = [];
