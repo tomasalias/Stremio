@@ -13,12 +13,88 @@ const builder = new addonBuilder({
   catalogs: [],
   stremioAddonsConfig: {
     issuer: "https://stremio-addons.net",
-    signature: "eyJhbGciOiJkaXIiLCJlbmMiOiJBMTI4Q0JDLUhTMjU2In0..Q3c1o6zGBTzcnwfyb57kMw.evFQ-ODwmOeZWPsJ2Zkx-S_EgSpekuJcSOgnrTUR8pPy9tGHSZHo0n2PaIr5kRag6A4GVxDQ5MEW2G-4w8sHVwjEyO9TIqJMHBbZ0xbItd83SmHtN9unjgIi3tgwf6xr.XxBTJoNyWmi89W67BhG4FA"
-  }
+    signature:
+      "eyJhbGciOiJkaXIiLCJlbmMiOiJBMTI4Q0JDLUhTMjU2In0..Q3c1o6zGBTzcnwfyb57kMw.evFQ-ODwmOeZWPsJ2Zkx-S_EgSpekuJcSOgnrTUR8pPy9tGHSZHo0n2PaIr5kRag6A4GVxDQ5MEW2G-4w8sHVwjEyO9TIqJMHBbZ0xbItd83SmHtN9unjgIi3tgwf6xr.XxBTJoNyWmi89W67BhG4FA",
+  },
 });
 
 const searchCache = new Map();
 const CACHE_TTL = 3600000; // 1 hour in milliseconds
+
+// Rate limiting configuration
+const REQUEST_DELAY = 1000; // 1 second between requests
+const MAX_RETRIES = 3;
+const RETRY_DELAY_BASE = 2000;
+
+// Queue to manage API requests
+let requestQueue = [];
+let isProcessingQueue = false;
+let lastRequestTime = 0;
+
+async function makeRateLimitedRequest(url, options = {}, retries = 0) {
+  return new Promise((resolve, reject) => {
+    requestQueue.push({ url, options, retries, resolve, reject });
+    processQueue();
+  });
+}
+
+// Process the request queue with rate limiting
+async function processQueue() {
+  if (isProcessingQueue || requestQueue.length === 0) return;
+
+  isProcessingQueue = true;
+
+  while (requestQueue.length > 0) {
+    const { url, options, retries, resolve, reject } = requestQueue.shift();
+
+    // Ensure minimum delay between requests
+    const now = Date.now();
+    const timeSinceLastRequest = now - lastRequestTime;
+    if (timeSinceLastRequest < REQUEST_DELAY) {
+      const delay = REQUEST_DELAY - timeSinceLastRequest;
+      console.log(`Rate limiting: waiting ${delay}ms before next request`);
+      await new Promise((res) => setTimeout(res, delay));
+    }
+
+    try {
+      lastRequestTime = Date.now();
+      const response = await axios.get(url, {
+        timeout: 10000, // 10 second timeout
+        ...options,
+      });
+      resolve(response);
+    } catch (error) {
+      if (
+        error.response &&
+        error.response.status === 429 &&
+        retries < MAX_RETRIES
+      ) {
+        // Rate limited - retry with exponential backoff
+        const retryDelay = RETRY_DELAY_BASE * Math.pow(2, retries);
+        console.log(
+          `Rate limited (429). Retrying in ${retryDelay}ms (attempt ${
+            retries + 1
+          }/${MAX_RETRIES})`
+        );
+
+        await new Promise((res) => setTimeout(res, retryDelay));
+
+        // Re-queue with incremented retry count
+        requestQueue.unshift({
+          url,
+          options,
+          retries: retries + 1,
+          resolve,
+          reject,
+        });
+      } else {
+        reject(error);
+      }
+    }
+  }
+
+  isProcessingQueue = false;
+}
 
 // Search Hellspy API for a given query
 async function searchHellspy(query) {
@@ -30,7 +106,7 @@ async function searchHellspy(query) {
   }
   try {
     console.log(`Searching Hellspy API for "${query}"...`);
-    const response = await axios.get(
+    const response = await makeRateLimitedRequest(
       `https://api.hellspy.to/gw/search?query=${encodeURIComponent(
         query
       )}&offset=0&limit=64`
@@ -41,7 +117,7 @@ async function searchHellspy(query) {
     return results;
   } catch (error) {
     // Handle errors gracefully
-    console.error("Hellspy API search error:", error);
+    console.error("Hellspy API search error:", error.message || error);
     return [];
   }
 }
@@ -59,7 +135,7 @@ async function getStreamUrl(id, fileHash) {
     console.log(
       `Fetching stream URL for video ID ${id} with hash ${fileHash}...`
     );
-    const response = await axios.get(
+    const response = await makeRateLimitedRequest(
       `https://api.hellspy.to/gw/video/${id}/${fileHash}`
     );
 
@@ -106,7 +182,7 @@ async function getStreamUrl(id, fileHash) {
     searchCache.set(cacheKey, { url: streams, timestamp: Date.now() });
     return streams;
   } catch (error) {
-    console.error("Hellspy API getStreamUrl error:", error);
+    console.error("Hellspy API getStreamUrl error:", error.message || error);
     return [];
   }
 }
@@ -136,8 +212,14 @@ async function getTitleFromWikidata(imdbId) {
     const headers = { Accept: "application/sparql-results+json" };
 
     const [czResponse, enResponse] = await Promise.all([
-      axios.get(url, { params: { query: baseQuery("cs") }, headers }),
-      axios.get(url, { params: { query: baseQuery("en") }, headers }),
+      makeRateLimitedRequest(url, {
+        params: { query: baseQuery("cs") },
+        headers,
+      }),
+      makeRateLimitedRequest(url, {
+        params: { query: baseQuery("en") },
+        headers,
+      }),
     ]);
 
     const czResult = czResponse.data.results.bindings[0] || {};
@@ -171,7 +253,10 @@ async function getTitleFromWikidata(imdbId) {
       type,
     };
   } catch (error) {
-    console.error(`Error fetching title information for ${imdbId}:`, error);
+    console.error(
+      `Error fetching title information for ${imdbId}:`,
+      error.message || error
+    );
     return null;
   }
 }
@@ -208,6 +293,13 @@ async function searchSeriesWithPattern(queries, season, episode) {
   const patterns = getSeasonEpisodePatterns(season, episode);
   for (const query of queries) {
     if (!query) continue;
+
+    // Add delay between searches to prevent overwhelming the API
+    if (queries.indexOf(query) > 0) {
+      console.log(`Waiting before next search query...`);
+      await new Promise((resolve) => setTimeout(resolve, 500)); // 500ms between different queries
+    }
+
     const results = await searchHellspy(query);
     // Try strict patterns first (SxxExx, xxXxx)
     let filtered = results.filter((r) =>
@@ -380,18 +472,21 @@ builder.defineStreamHandler(async ({ type, id, name, episode, year }) => {
       }
     }
   } else {
-    results = await searchHellspy(searchQuery);
-    if (results.length === 0 && additionalQuery) {
-      results = await searchHellspy(additionalQuery);
-    }
-    if (results.length === 0 && simplifiedQuery) {
-      results = await searchHellspy(simplifiedQuery);
-    }
-    if (results.length === 0 && simplifiedAdditionalQuery) {
-      results = await searchHellspy(simplifiedAdditionalQuery);
-    }
-    if (results.length === 0 && classicQuery) {
-      results = await searchHellspy(classicQuery);
+    // For movies, try queries sequentially with delays
+    const movieQueries = [
+      searchQuery,
+      additionalQuery,
+      simplifiedQuery,
+      simplifiedAdditionalQuery,
+      classicQuery,
+    ].filter(Boolean);
+
+    for (let i = 0; i < movieQueries.length && results.length === 0; i++) {
+      if (i > 0) {
+        console.log(`Waiting before next movie search query...`);
+        await new Promise((resolve) => setTimeout(resolve, 500)); // 500ms between queries
+      }
+      results = await searchHellspy(movieQueries[i]);
     }
     // If no results found, try searching with the simplified name
     if (results.length === 0) {
@@ -592,7 +687,7 @@ builder.defineStreamHandler(async ({ type, id, name, episode, year }) => {
         }
       }
     } catch (error) {
-      console.error("Error processing result:", error);
+      console.error("Error processing result:", error.message || error);
     }
   }
   if (streams.length > 0) {
