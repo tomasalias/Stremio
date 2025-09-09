@@ -77,10 +77,7 @@ For production deployment, we recommend using **[endora.cz](https://www.endora.c
 ### Deployment Steps for Endora.cz:
 
 1. **Upload files** to your web hosting directory
-2. **Run composer install** via SSH or hosting panel
-3. **Set proper permissions** for cache and log directories
-4. **Configure your domain** to point to the addon
-5. **Add the addon to Stremio** using your domain URL + `/manifest.json`
+2. **Add the addon to Stremio** using your domain URL + `/manifest.json`
 
 ## Features
 
