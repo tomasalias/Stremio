@@ -1,0 +1,113 @@
+#! /bin/sh
+
+SED="/usr/bin/sed"
+prefix="/usr/local/php/8.4.12"
+datarootdir="/usr/local/php/8.4.12/php"
+exec_prefix="${prefix}"
+version="8.4.12"
+vernum="80412"
+include_dir="${prefix}/include/php"
+lib_dir="${exec_prefix}/lib"
+includes="-I$include_dir -I$include_dir/main -I$include_dir/TSRM -I$include_dir/Zend -I$include_dir/ext -I$include_dir/ext/date/lib"
+ldflags=""
+libs="  -ltidy -lreadline -lncurses -lbz2 -lm  -lxml2 -lssl -lcrypto -lsqlite3 -lz -lcurl -lxml2 -lssl -lcrypto -lz -lpng16 -lz -ljpeg -lonig -lsqlite3 -lxml2 -lxml2 -lxml2 -lxml2 -lxml2 -lxslt -lxml2 -lexslt -lxslt -lxml2 -lzip -lz -lssl -lcrypto"
+extension_dir="/usr/local/php/8.4.12/lib/php/extensions/no-debug-non-zts-20240924"
+man_dir=`eval echo /usr/local/php/8.4.12/share/man`
+program_prefix=""
+program_suffix=""
+exe_extension=""
+php_cli_binary=NONE
+php_cgi_binary=NONE
+configure_options=" '--with-config-file-path=/usr/local/php/8.4.12/etc' '--with-config-file-scan-dir=/usr/local/php/8.4.12/etc/conf.d' '--prefix=/usr/local/php/8.4.12' '--libexecdir=/usr/local/php/8.4.12/libexec' '--datadir=/usr/local/php/8.4.12/share/php' '--mandir=/usr/local/php/8.4.12/share/man' '--enable-sockets' '--enable-exif' '--with-zlib' '--with-zlib-dir=/usr' '--with-bz2' '--enable-intl' '--with-openssl' '--enable-soap' '--enable-xmlreader' '--with-xsl' '--enable-ftp' '--enable-cgi' '--with-curl=/usr' '--with-tidy' '--enable-sysvsem' '--enable-sysvshm' '--enable-shmop' '--with-mysqli=mysqlnd' '--with-pdo-mysql=mysqlnd' '--with-pdo-sqlite' '--enable-pcntl' '--with-readline' '--enable-mbstring' '--disable-debug' '--enable-fpm' '--enable-bcmath' '--enable-phpdbg' '--enable-gd' '--with-jpeg' '--with-zip' '--with-mhash' '--disable-intl' '--disable-cgi' '--disable-fpm' '--disable-phpdbg' '--disable-shared' '--enable-static' '--with-libdir=lib64'"
+php_sapis=" cli"
+ini_dir="/usr/local/php/8.4.12/etc/conf.d"
+ini_path="/usr/local/php/8.4.12/etc"
+php_embed_type=""
+
+# Set php_cli_binary and php_cgi_binary if available
+for sapi in $php_sapis; do
+  case $sapi in
+  cli)
+    php_cli_binary="${exec_prefix}/bin/${program_prefix}php${program_suffix}${exe_extension}"
+    ;;
+  cgi)
+    php_cgi_binary="${exec_prefix}/bin/${program_prefix}php-cgi${program_suffix}${exe_extension}"
+    ;;
+  esac
+done
+
+# Determine which (if any) php binary is available
+if test "$php_cli_binary" != "NONE"; then
+  php_binary="$php_cli_binary"
+else
+  php_binary="$php_cgi_binary"
+fi
+
+# Set embed SAPI library path
+if test "$php_embed_type" = "shared"; then
+  php_embed_lib=libphp.so
+elif test "$php_embed_type" = "static"; then
+  php_embed_lib=libphp.a
+fi
+
+# Remove quotes
+configure_options=`echo $configure_options | $SED -e "s#'##g"`
+
+case "$1" in
+--prefix)
+  echo $prefix;;
+--includes)
+  echo $includes;;
+--ldflags)
+  echo $ldflags;;
+--libs)
+  echo $libs;;
+--extension-dir)
+  echo $extension_dir;;
+--include-dir)
+  echo $include_dir;;
+--lib-dir)
+  echo $lib_dir;;
+--lib-embed)
+  echo $php_embed_lib;;
+--php-binary)
+  echo $php_binary;;
+--php-sapis)
+  echo $php_sapis;;
+--configure-options)
+  echo $configure_options;;
+--man-dir)
+  echo $man_dir;;
+--ini-path)
+  echo $ini_path;;
+--ini-dir)
+  echo $ini_dir;;
+--version)
+  echo $version;;
+--vernum)
+  echo $vernum;;
+*)
+  cat << EOF
+Usage: $0 [OPTION]
+Options:
+  --prefix            [$prefix]
+  --includes          [$includes]
+  --ldflags           [$ldflags]
+  --libs              [$libs]
+  --extension-dir     [$extension_dir]
+  --include-dir       [$include_dir]
+  --lib-dir           [$lib_dir]
+  --lib-embed         [$php_embed_lib]
+  --man-dir           [$man_dir]
+  --php-binary        [$php_binary]
+  --php-sapis         [$php_sapis]
+  --ini-path          [$ini_path]
+  --ini-dir           [$ini_dir]
+  --configure-options [$configure_options]
+  --version           [$version]
+  --vernum            [$vernum]
+EOF
+  exit 1;;
+esac
+
+exit 0
