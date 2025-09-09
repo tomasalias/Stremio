@@ -1,0 +1,771 @@
+[2025-09-09 08:24:36][START] addon.php loaded
+[2025-09-09 08:24:37][START] addon.php loaded
+[2025-09-09 08:25:07][START] addon.php loaded
+[2025-09-09 08:25:12][START] addon.php loaded
+[2025-09-09 08:25:18][START] addon.php loaded
+[2025-09-09 08:26:23][START] addon.php loaded
+[2025-09-09 08:26:34][START] addon.php loaded
+[2025-09-09 08:26:47][START] addon.php loaded
+[2025-09-09 08:28:34][START] addon.php loaded
+[2025-09-09 08:28:34][INFO] Raw POST body: 
+[2025-09-09 08:28:34][INFO] Stream request: type= id= name= episode=null
+[2025-09-09 08:28:34][WARN] No title name found for id 
+[2025-09-09 08:28:43][START] addon.php loaded
+[2025-09-09 08:28:43][INFO] Raw POST body: 
+[2025-09-09 08:28:43][INFO] Stream request: type= id= name= episode=null
+[2025-09-09 08:28:43][WARN] No title name found for id 
+[2025-09-09 08:29:33][START] addon.php loaded
+[2025-09-09 08:29:33][INFO] Raw POST body: {"type":"movie","id":"tt0133093","name":"The Matrix"}
+[2025-09-09 08:29:33][INFO] Stream request: type=movie id=tt0133093 name=The Matrix episode=null
+[2025-09-09 08:29:33][INFO] Search query: The Matrix
+[2025-09-09 08:29:33][INFO] Searching Hellspy for "The Matrix"...
+[2025-09-09 08:29:33][INFO] HTTP GET: https://api.hellspy.to/gw/search?query=The+Matrix&offset=0&limit=64
+[2025-09-09 08:29:33][INFO] HTTP response (truncated): {"items": [{"structType": "derivedObject", "objectType": "GWSearchVideo", "id": 7600151, "title": "The Matrix Revolutions", "fileHash": "8222018159b6171d", "size": 13313244894, "duration": 7755, "thumbs": ["https://thumbs.hellspy.to/5/e/3/e/6/b//5e3e6be9915d7/1.jpg", "https://thumbs.hellspy.to/5/e/3/e/6/b//5e3e6be9915d7/2.jpg", "https://thumbs.hellspy.to/5/e/3/e/6/b//5e3e6be9915d7/3.jpg", "https://thumbs.hellspy.to/5/e/3/e/6/b//5e3e6be9915d7/4.jpg", "https://thumbs.hellspy.to/5/e/3/e/6/b//5e3e6b
+[2025-09-09 08:29:33][INFO] Found 64 items for "The Matrix"
+[2025-09-09 08:29:33][ERROR] Processing result error: get_stream_url(): Argument #1 ($id) must be of type string, int given, called in /home/html/tomasalias.endora.site/public_html/addon.php on line 191
+[2025-09-09 08:29:33][ERROR] Processing result error: get_stream_url(): Argument #1 ($id) must be of type string, int given, called in /home/html/tomasalias.endora.site/public_html/addon.php on line 191
+[2025-09-09 08:29:33][ERROR] Processing result error: get_stream_url(): Argument #1 ($id) must be of type string, int given, called in /home/html/tomasalias.endora.site/public_html/addon.php on line 191
+[2025-09-09 08:29:33][ERROR] Processing result error: get_stream_url(): Argument #1 ($id) must be of type string, int given, called in /home/html/tomasalias.endora.site/public_html/addon.php on line 191
+[2025-09-09 08:29:33][ERROR] Processing result error: get_stream_url(): Argument #1 ($id) must be of type string, int given, called in /home/html/tomasalias.endora.site/public_html/addon.php on line 191
+[2025-09-09 08:29:33][INFO] Returning 0 streams
+[2025-09-09 08:35:53][START] addon.php loaded
+[2025-09-09 08:36:06][START] addon.php loaded
+[2025-09-09 08:36:35][START] addon.php loaded
+[2025-09-09 08:36:35][INFO] Raw POST body: {"type":"movie","id":"tt0133093","name":"The Matrix"}
+[2025-09-09 08:36:35][INFO] Decoded request: {"type":"movie","id":"tt0133093","name":"The Matrix"}
+[2025-09-09 08:36:35][INFO] Stream request: type=movie id=tt0133093 name=The Matrix episode=null
+[2025-09-09 08:36:35][INFO] Search query: The Matrix
+[2025-09-09 08:36:35][INFO] Fetching stream for video 7600151 (8222018159b6171d)
+[2025-09-09 08:36:36][INFO] HTTP GET: https://api.hellspy.to/gw/video/7600151/8222018159b6171d
+[2025-09-09 08:36:36][INFO] HTTP response (truncated): {"structType": "derivedObject", "objectType": "GWVideo", "id": 7600151, "title": "The Matrix Revolutions", "fileHash": "8222018159b6171d", "size": 13313244894, "duration": 7755, "thumbs": ["https://thumbs.hellspy.to/5/e/3/e/6/b//5e3e6be9915d7/1.jpg"], "filename": "The Matrix Revolutions.mkv", "conversions": {"480": "https://storage4.onecdn1.net/15807559/MXou0EIz5FkjfK0IBYIBjI8kul3ubGS8MhLjc5LswzSlMHvKCKzunWHoQFeaCoBslnCeaFwZUldiAWcV2hOpha3SxkfMgCpyCQjSXbTVZHYDijkCbQsdW.mp4?token=A1206ZyNVCax&exp
+[2025-09-09 08:36:36][INFO] Video: "The Matrix Revolutions" duration 7755 s
+[2025-09-09 08:36:36][INFO] Found 2 qualities for 7600151
+[2025-09-09 08:36:36][INFO] Fetching stream for video 16920600 (7f74bad7c343a156)
+[2025-09-09 08:36:36][ERROR] get_stream_url error: usleep(): Argument #1 ($microseconds) must be greater than or equal to 0
+[2025-09-09 08:36:36][INFO] Fetching stream for video 9960069 (58836aa3c3587083)
+[2025-09-09 08:36:36][ERROR] get_stream_url error: usleep(): Argument #1 ($microseconds) must be greater than or equal to 0
+[2025-09-09 08:36:36][INFO] Fetching stream for video 17548104 (ecbb2ca061a7cb6a)
+[2025-09-09 08:36:36][ERROR] get_stream_url error: usleep(): Argument #1 ($microseconds) must be greater than or equal to 0
+[2025-09-09 08:36:36][INFO] Fetching stream for video 19162232 (3b65f8547774c8f2)
+[2025-09-09 08:36:36][ERROR] get_stream_url error: usleep(): Argument #1 ($microseconds) must be greater than or equal to 0
+[2025-09-09 08:36:36][INFO] Returning 2 streams
+[2025-09-09 08:36:36][INFO] Stream result count: 2
+[2025-09-09 08:36:59][START] addon.php loaded
+[2025-09-09 08:46:46][START] addon.php loaded
+[2025-09-09 08:46:57][START] addon.php loaded
+[2025-09-09 08:48:17][START] addon.php loaded
+[2025-09-09 08:48:28][START] addon.php loaded
+[2025-09-09 08:48:56][START] addon.php loaded
+[2025-09-09 08:48:56][START] addon.php loaded
+[2025-09-09 08:48:57][START] addon.php loaded
+[2025-09-09 08:48:59][START] addon.php loaded
+[2025-09-09 08:49:03][START] addon.php loaded
+[2025-09-09 08:49:03][INFO] Stremio GET stream: type=movie id=tt5950044
+[2025-09-09 08:49:03][INFO] Stream request: type=movie id=tt5950044 name=tt5950044 episode=null
+[2025-09-09 08:49:03][INFO] Search query: tt5950044
+[2025-09-09 08:49:03][INFO] Searching Hellspy for "tt5950044"...
+[2025-09-09 08:49:04][INFO] HTTP GET: https://api.hellspy.to/gw/search?query=tt5950044&offset=0&limit=64
+[2025-09-09 08:49:04][INFO] HTTP response (truncated): {"items": [], "offset": "0", "limit": "64", "structType": "list"}
+[2025-09-09 08:49:04][INFO] Found 0 items for "tt5950044"
+[2025-09-09 08:49:04][INFO] No search results for tt5950044
+[2025-09-09 08:49:28][START] addon.php loaded
+[2025-09-09 08:49:28][INFO] Stremio GET stream: type=series id=tt13443470%3A1%3A1
+[2025-09-09 08:49:28][INFO] Stream request: type=series id=tt13443470%3A1%3A1 name=tt13443470%3A1%3A1 episode=null
+[2025-09-09 08:49:28][INFO] Search query: tt13443470%3A1%3A1
+[2025-09-09 08:49:28][INFO] Searching Hellspy for "tt13443470%3A1%3A1"...
+[2025-09-09 08:49:28][INFO] HTTP GET: https://api.hellspy.to/gw/search?query=tt13443470%253A1%253A1&offset=0&limit=64
+[2025-09-09 08:49:28][INFO] HTTP response (truncated): {"items": [], "offset": "0", "limit": "64", "structType": "list"}
+[2025-09-09 08:49:28][INFO] Found 0 items for "tt13443470%3A1%3A1"
+[2025-09-09 08:49:28][INFO] No search results for tt13443470%3A1%3A1
+[2025-09-09 09:00:23][START] addon.php loaded
+[2025-09-09 09:00:23][INFO] Stremio GET stream: type=movie id=tt14205554
+[2025-09-09 09:00:23][INFO] Stream request: type=movie id=tt14205554 name=tt14205554 episode=null
+[2025-09-09 09:00:23][INFO] Fetching titles for tt14205554 from Wikidata
+[2025-09-09 09:00:24][INFO] HTTP GET: https://query.wikidata.org/sparql?query=%0A++++++++++++++SELECT+%3Ffilm+%3FfilmLabel+%3ForiginalTitle+%3FpublicationDate+%3FinstanceLabel+WHERE+%7B%0A++++++++++++++++%3Ffilm+wdt%3AP345+%22tt14205554%22.%0A++++++++++++++++OPTIONAL+%7B+%3Ffilm+wdt%3AP1476+%3ForiginalTitle.+%7D%0A++++++++++++++++OPTIONAL+%7B+%3Ffilm+wdt%3AP577+%3FpublicationDate.+%7D%0A++++++++++++++++OPTIONAL+%7B+%3Ffilm+wdt%3AP31+%3Finstance.+%7D%0A++++++++++++++++SERVICE+wikibase%3Alabel+%7B+bd%3AserviceParam+wikibase%3Alanguage+%22cs%22.+%7D%0A++++++++++++++%7D%0A++++++++++++
+[2025-09-09 09:00:24][ERROR] HTTP 403 for https://query.wikidata.org/sparql?query=%0A++++++++++++++SELECT+%3Ffilm+%3FfilmLabel+%3ForiginalTitle+%3FpublicationDate+%3FinstanceLabel+WHERE+%7B%0A++++++++++++++++%3Ffilm+wdt%3AP345+%22tt14205554%22.%0A++++++++++++++++OPTIONAL+%7B+%3Ffilm+wdt%3AP1476+%3ForiginalTitle.+%7D%0A++++++++++++++++OPTIONAL+%7B+%3Ffilm+wdt%3AP577+%3FpublicationDate.+%7D%0A++++++++++++++++OPTIONAL+%7B+%3Ffilm+wdt%3AP31+%3Finstance.+%7D%0A++++++++++++++++SERVICE+wikibase%3Alabel+%7B+bd%3AserviceParam+wikibase%3Alanguage+%22cs%22.+%7D%0A++++++++++++++%7D%0A++++++++++++
+[2025-09-09 09:00:24][ERROR] Wikidata error for tt14205554: HTTP 403 for https://query.wikidata.org/sparql?query=%0A++++++++++++++SELECT+%3Ffilm+%3FfilmLabel+%3ForiginalTitle+%3FpublicationDate+%3FinstanceLabel+WHERE+%7B%0A++++++++++++++++%3Ffilm+wdt%3AP345+%22tt14205554%22.%0A++++++++++++++++OPTIONAL+%7B+%3Ffilm+wdt%3AP1476+%3ForiginalTitle.+%7D%0A++++++++++++++++OPTIONAL+%7B+%3Ffilm+wdt%3AP577+%3FpublicationDate.+%7D%0A++++++++++++++++OPTIONAL+%7B+%3Ffilm+wdt%3AP31+%3Finstance.+%7D%0A++++++++++++++++SERVICE+wikibase%3Alabel+%7B+bd%3AserviceParam+wikibase%3Alanguage+%22cs%22.+%7D%0A++++++++++++++%7D%0A++++++++++++
+[2025-09-09 09:00:24][INFO] Search query: tt14205554
+[2025-09-09 09:00:24][INFO] Searching Hellspy for "tt14205554"...
+[2025-09-09 09:00:25][INFO] HTTP GET: https://api.hellspy.to/gw/search?query=tt14205554&offset=0&limit=64
+[2025-09-09 09:00:25][INFO] HTTP response (truncated): {"items": [], "offset": "0", "limit": "64", "structType": "list"}
+[2025-09-09 09:00:25][INFO] Found 0 items for "tt14205554"
+[2025-09-09 09:00:25][INFO] No search results for tt14205554
+[2025-09-09 09:16:11][START] addon.php loaded
+[2025-09-09 09:16:11][START] addon.php loaded
+[2025-09-09 09:16:15][START] addon.php loaded
+[2025-09-09 09:16:15][START] addon.php loaded
+[2025-09-09 09:16:15][START] addon.php loaded
+[2025-09-09 09:20:57][START] addon.php loaded
+[2025-09-09 09:21:10][START] addon.php loaded
+[2025-09-09 09:22:22][START] addon.php loaded
+[2025-09-09 09:22:34][START] addon.php loaded
+[2025-09-09 09:22:34][INFO] Stremio GET stream: type=movie id=tt28996126
+[2025-09-09 09:22:34][INFO] Stream request: type=movie id=tt28996126 name=tt28996126 episode=null
+[2025-09-09 09:22:34][INFO] Fetching titles for tt28996126 from Wikidata
+[2025-09-09 09:22:35][INFO] HTTP GET: https://query.wikidata.org/sparql?query=%0A++++++++++++++SELECT+%3Ffilm+%3FfilmLabel+%3ForiginalTitle+%3FpublicationDate+%3FinstanceLabel+WHERE+%7B%0A++++++++++++++++%3Ffilm+wdt%3AP345+%22tt28996126%22.%0A++++++++++++++++OPTIONAL+%7B+%3Ffilm+wdt%3AP1476+%3ForiginalTitle.+%7D%0A++++++++++++++++OPTIONAL+%7B+%3Ffilm+wdt%3AP577+%3FpublicationDate.+%7D%0A++++++++++++++++OPTIONAL+%7B+%3Ffilm+wdt%3AP31+%3Finstance.+%7D%0A++++++++++++++++SERVICE+wikibase%3Alabel+%7B+bd%3AserviceParam+wikibase%3Alanguage+%22cs%22.+%7D%0A++++++++++++++%7D%0A++++++++++++
+[2025-09-09 09:22:35][INFO] HTTP response (truncated): {
+  "head" : {
+    "vars" : [ "film", "filmLabel", "originalTitle", "publicationDate", "instanceLabel" ]
+  },
+  "results" : {
+    "bindings" : [ {
+      "film" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q126682448"
+      },
+      "originalTitle" : {
+        "xml:lang" : "en",
+        "type" : "literal",
+        "value" : "Nobody 2"
+      },
+      "publicationDate" : {
+        "datatype" : "http://www.w3.org/2001/XMLSchema#dateTime",
+        "type" : "literal",
+
+[2025-09-09 09:22:37][INFO] HTTP GET: https://query.wikidata.org/sparql?query=%0A++++++++++++++SELECT+%3Ffilm+%3FfilmLabel+%3ForiginalTitle+%3FpublicationDate+%3FinstanceLabel+WHERE+%7B%0A++++++++++++++++%3Ffilm+wdt%3AP345+%22tt28996126%22.%0A++++++++++++++++OPTIONAL+%7B+%3Ffilm+wdt%3AP1476+%3ForiginalTitle.+%7D%0A++++++++++++++++OPTIONAL+%7B+%3Ffilm+wdt%3AP577+%3FpublicationDate.+%7D%0A++++++++++++++++OPTIONAL+%7B+%3Ffilm+wdt%3AP31+%3Finstance.+%7D%0A++++++++++++++++SERVICE+wikibase%3Alabel+%7B+bd%3AserviceParam+wikibase%3Alanguage+%22en%22.+%7D%0A++++++++++++++%7D%0A++++++++++++
+[2025-09-09 09:22:37][INFO] HTTP response (truncated): {
+  "head" : {
+    "vars" : [ "film", "filmLabel", "originalTitle", "publicationDate", "instanceLabel" ]
+  },
+  "results" : {
+    "bindings" : [ {
+      "film" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q126682448"
+      },
+      "originalTitle" : {
+        "xml:lang" : "en",
+        "type" : "literal",
+        "value" : "Nobody 2"
+      },
+      "publicationDate" : {
+        "datatype" : "http://www.w3.org/2001/XMLSchema#dateTime",
+        "type" : "literal",
+
+[2025-09-09 09:22:37][INFO] Wikidata resolved: EN=Nobody 2, CZ=, Year=2025
+[2025-09-09 09:22:37][INFO] Search query: Nobody 2 2025
+[2025-09-09 09:22:37][INFO] Searching Hellspy for "Nobody 2 2025"...
+[2025-09-09 09:22:39][INFO] HTTP GET: https://api.hellspy.to/gw/search?query=Nobody+2+2025&offset=0&limit=64
+[2025-09-09 09:22:39][INFO] HTTP response (truncated): {"items": [{"structType": "derivedObject", "objectType": "GWSearchVideo", "id": 19256613, "title": "Nobody 2 2025 1080p WEB-DL HEVC x265 5.1 CZ titulky", "fileHash": "df0736f48607f063", "size": 1445402474, "duration": 5372, "thumbs": ["https://thumbs.hellspy.to/6/8/b/f/7/7//68bf772683686/1.jpg", "https://thumbs.hellspy.to/6/8/b/f/7/7//68bf772683686/2.jpg", "https://thumbs.hellspy.to/6/8/b/f/7/7//68bf772683686/3.jpg", "https://thumbs.hellspy.to/6/8/b/f/7/7//68bf772683686/4.jpg", "https://thumbs.h
+[2025-09-09 09:22:39][INFO] Found 14 items for "Nobody 2 2025"
+[2025-09-09 09:22:39][INFO] Fetching stream for video 19256613 (df0736f48607f063)
+[2025-09-09 09:22:40][INFO] HTTP GET: https://api.hellspy.to/gw/video/19256613/df0736f48607f063
+[2025-09-09 09:22:40][INFO] HTTP response (truncated): {"structType": "derivedObject", "objectType": "GWVideo", "id": 19256613, "title": "Nobody 2 2025 1080p WEB-DL HEVC x265 5.1 CZ titulky", "fileHash": "df0736f48607f063", "size": 1445402474, "duration": 5372, "thumbs": ["https://thumbs.hellspy.to/6/8/b/f/7/7//68bf772683686/1.jpg"], "filename": "Nobody 2 2025 1080p WEB-DL HEVC x265 5.1 CZ titulky.mkv", "conversions": {"720": "https://storage4.onecdn1.net/145869804/ob8tOLhBMf4ZiJ5SmpSKYhrACqDHZWIjNcbEf6xIBMtvRUa8tzDUQ8s6DCZNFzGUvAuNmTZgH5xUX5fAEUzdC
+[2025-09-09 09:22:40][INFO] Video: "Nobody 2 2025 1080p WEB-DL HEVC x265 5.1 CZ titulky" duration 5372 s
+[2025-09-09 09:22:40][INFO] Found 1 qualities for 19256613
+[2025-09-09 09:22:40][INFO] Fetching stream for video 19257837 (31c4407fd16fbeb1)
+[2025-09-09 09:22:42][INFO] HTTP GET: https://api.hellspy.to/gw/video/19257837/31c4407fd16fbeb1
+[2025-09-09 09:22:42][INFO] HTTP response (truncated): {"structType": "derivedObject", "objectType": "GWVideo", "id": 19257837, "title": "Nobody 2 2025 1080p CZ titulky", "fileHash": "31c4407fd16fbeb1", "size": 1445402474, "duration": 5372, "thumbs": ["https://thumbs.hellspy.to/6/8/b/f/9/5//68bf95d0003d8/1.jpg"], "filename": "Nobody 2 2025 1080p CZ titulky.mkv", "conversions": {"720": "https://storage4.onecdn1.net/145879335/oepiM8UGgIOwU3wFo8hAZUXkCVyHLZI0VcEAivAIwYFaVSpMirbS9Ysjquq0uP7SLMfQ2TMJHrVFaYf9jSoVC78Sg0i6JCdKso3C0jUAJTXxT83TbRsLA.mp4?token
+[2025-09-09 09:22:42][INFO] Video: "Nobody 2 2025 1080p CZ titulky" duration 5372 s
+[2025-09-09 09:22:42][INFO] Found 1 qualities for 19257837
+[2025-09-09 09:22:42][INFO] Fetching stream for video 19256611 (a32fa052683aebe5)
+[2025-09-09 09:22:43][INFO] HTTP GET: https://api.hellspy.to/gw/video/19256611/a32fa052683aebe5
+[2025-09-09 09:22:43][INFO] HTTP response (truncated): {"structType": "derivedObject", "objectType": "GWVideo", "id": 19256611, "title": "Nobody 2 2025 1080p WEB-DL HEVC x265 5.1 CZ titulky", "fileHash": "a32fa052683aebe5", "size": 1445402474, "duration": 5372, "thumbs": ["https://thumbs.hellspy.to/6/8/b/f/7/7//68bf7720b2c48/1.jpg"], "filename": "Nobody 2 2025 1080p WEB-DL HEVC x265 5.1 CZ titulky.mkv", "conversions": {"720": "https://storage4.onecdn1.net/145869810/qmvtgeSynsgrf6JI8VspkSLVCGNHXvIDkclwf7YIGeiPwU5LtxBUXZulPs2gsYyUlmiBYTP5H65TeyfE2UjvC
+[2025-09-09 09:22:43][INFO] Video: "Nobody 2 2025 1080p WEB-DL HEVC x265 5.1 CZ titulky" duration 5372 s
+[2025-09-09 09:22:43][INFO] Found 1 qualities for 19256611
+[2025-09-09 09:22:43][INFO] Fetching stream for video 19257831 (e76918835e0e201d)
+[2025-09-09 09:22:44][INFO] HTTP GET: https://api.hellspy.to/gw/video/19257831/e76918835e0e201d
+[2025-09-09 09:22:44][INFO] HTTP response (truncated): {"structType": "derivedObject", "objectType": "GWVideo", "id": 19257831, "title": "Nobody 2 2025 1080p CZ titulky", "fileHash": "e76918835e0e201d", "size": 1445402474, "duration": 5372, "thumbs": ["https://thumbs.hellspy.to/6/8/b/f/9/5//68bf9598a83e1/1.jpg"], "filename": "Nobody 2 2025 1080p CZ titulky.mkv", "conversions": {"720": "https://storage4.onecdn1.net/145879326/onViwPs3mUKbS9mSBjsgksOmCxvHVoI5ocDrToZIgQuzoS9miD7SEote0hvqhZdSPjug9TQ6HlVuYZfvRSadCybSkriz0CLdtAbCo8uLOTYwTozTOAtZg.mp4?token
+[2025-09-09 09:22:44][INFO] Video: "Nobody 2 2025 1080p CZ titulky" duration 5372 s
+[2025-09-09 09:22:44][INFO] Found 1 qualities for 19257831
+[2025-09-09 09:22:44][INFO] Fetching stream for video 19258228 (ba8497014b30c782)
+[2025-09-09 09:22:46][INFO] HTTP GET: https://api.hellspy.to/gw/video/19258228/ba8497014b30c782
+[2025-09-09 09:22:46][INFO] HTTP response (truncated): {"structType": "derivedObject", "objectType": "GWVideo", "id": 19258228, "title": "Nobody 2 2025 1080p CZ titulky", "fileHash": "ba8497014b30c782", "size": 1445402474, "duration": 5372, "thumbs": ["https://thumbs.hellspy.to/6/8/b/f/9/d//68bf9dc1c6563/1.jpg"], "filename": "Nobody 2 2025 1080p CZ titulky.mkv", "conversions": {"720": "https://storage4.onecdn1.net/145882473/wq2uBWFr6sj3f2dSPMFmKFEmCVpHbQIVjcVLS0WIMGHyghZ7uxrh3LT0nFKjsBghPBUQRiw8HKnsy5fOQh23tLyh8BuWJC2ZTxYC6jC2biwxidaiYRTpY.mp4?token
+[2025-09-09 09:22:46][INFO] Video: "Nobody 2 2025 1080p CZ titulky" duration 5372 s
+[2025-09-09 09:22:46][INFO] Found 1 qualities for 19258228
+[2025-09-09 09:22:46][INFO] Returning 5 streams
+[2025-09-09 09:24:15][START] addon.php loaded
+[2025-09-09 09:24:15][INFO] Stremio GET stream: type=series id=tt8050756:3:2
+[2025-09-09 09:24:15][INFO] Stream request: type=series id=tt8050756:3:2 name=tt8050756:3:2 episode=null
+[2025-09-09 09:24:15][INFO] Search query: tt8050756:3:2
+[2025-09-09 09:24:15][INFO] Searching Hellspy for "tt8050756:3:2"...
+[2025-09-09 09:24:15][INFO] HTTP GET: https://api.hellspy.to/gw/search?query=tt8050756%3A3%3A2&offset=0&limit=64
+[2025-09-09 09:24:15][INFO] HTTP response (truncated): {"items": [], "offset": "0", "limit": "64", "structType": "list"}
+[2025-09-09 09:24:15][INFO] Found 0 items for "tt8050756:3:2"
+[2025-09-09 09:24:15][INFO] No search results for tt8050756:3:2
+[2025-09-09 09:25:36][START] addon.php loaded
+[2025-09-09 09:25:36][INFO] Stremio GET stream: type=series id=tt13443470:1:2
+[2025-09-09 09:25:36][INFO] Stream request: type=series id=tt13443470:1:2 name=tt13443470:1:2 episode=null
+[2025-09-09 09:25:36][INFO] Search query: tt13443470:1:2
+[2025-09-09 09:25:36][INFO] Searching Hellspy for "tt13443470:1:2"...
+[2025-09-09 09:25:37][INFO] HTTP GET: https://api.hellspy.to/gw/search?query=tt13443470%3A1%3A2&offset=0&limit=64
+[2025-09-09 09:25:37][INFO] HTTP response (truncated): {"items": [], "offset": "0", "limit": "64", "structType": "list"}
+[2025-09-09 09:25:37][INFO] Found 0 items for "tt13443470:1:2"
+[2025-09-09 09:25:37][INFO] No search results for tt13443470:1:2
+[2025-09-09 09:25:48][START] addon.php loaded
+[2025-09-09 09:25:48][INFO] Stremio GET stream: type=movie id=tt3402138
+[2025-09-09 09:25:48][INFO] Stream request: type=movie id=tt3402138 name=tt3402138 episode=null
+[2025-09-09 09:25:48][INFO] Fetching titles for tt3402138 from Wikidata
+[2025-09-09 09:25:48][INFO] HTTP GET: https://query.wikidata.org/sparql?query=%0A++++++++++++++SELECT+%3Ffilm+%3FfilmLabel+%3ForiginalTitle+%3FpublicationDate+%3FinstanceLabel+WHERE+%7B%0A++++++++++++++++%3Ffilm+wdt%3AP345+%22tt3402138%22.%0A++++++++++++++++OPTIONAL+%7B+%3Ffilm+wdt%3AP1476+%3ForiginalTitle.+%7D%0A++++++++++++++++OPTIONAL+%7B+%3Ffilm+wdt%3AP577+%3FpublicationDate.+%7D%0A++++++++++++++++OPTIONAL+%7B+%3Ffilm+wdt%3AP31+%3Finstance.+%7D%0A++++++++++++++++SERVICE+wikibase%3Alabel+%7B+bd%3AserviceParam+wikibase%3Alanguage+%22cs%22.+%7D%0A++++++++++++++%7D%0A++++++++++++
+[2025-09-09 09:25:48][INFO] HTTP response (truncated): {
+  "head" : {
+    "vars" : [ "film", "filmLabel", "originalTitle", "publicationDate", "instanceLabel" ]
+  },
+  "results" : {
+    "bindings" : [ {
+      "film" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q125908027"
+      },
+      "originalTitle" : {
+        "xml:lang" : "en",
+        "type" : "literal",
+        "value" : "The Naked Gun"
+      },
+      "publicationDate" : {
+        "datatype" : "http://www.w3.org/2001/XMLSchema#dateTime",
+        "type" : "liter
+[2025-09-09 09:25:50][INFO] HTTP GET: https://query.wikidata.org/sparql?query=%0A++++++++++++++SELECT+%3Ffilm+%3FfilmLabel+%3ForiginalTitle+%3FpublicationDate+%3FinstanceLabel+WHERE+%7B%0A++++++++++++++++%3Ffilm+wdt%3AP345+%22tt3402138%22.%0A++++++++++++++++OPTIONAL+%7B+%3Ffilm+wdt%3AP1476+%3ForiginalTitle.+%7D%0A++++++++++++++++OPTIONAL+%7B+%3Ffilm+wdt%3AP577+%3FpublicationDate.+%7D%0A++++++++++++++++OPTIONAL+%7B+%3Ffilm+wdt%3AP31+%3Finstance.+%7D%0A++++++++++++++++SERVICE+wikibase%3Alabel+%7B+bd%3AserviceParam+wikibase%3Alanguage+%22en%22.+%7D%0A++++++++++++++%7D%0A++++++++++++
+[2025-09-09 09:25:50][INFO] HTTP response (truncated): {
+  "head" : {
+    "vars" : [ "film", "filmLabel", "originalTitle", "publicationDate", "instanceLabel" ]
+  },
+  "results" : {
+    "bindings" : [ {
+      "film" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q125908027"
+      },
+      "originalTitle" : {
+        "xml:lang" : "en",
+        "type" : "literal",
+        "value" : "The Naked Gun"
+      },
+      "publicationDate" : {
+        "datatype" : "http://www.w3.org/2001/XMLSchema#dateTime",
+        "type" : "liter
+[2025-09-09 09:25:50][INFO] Wikidata resolved: EN=The Naked Gun, CZ=Bláznivá střela, Year=2025
+[2025-09-09 09:25:50][INFO] Search query: The Naked Gun 2025
+[2025-09-09 09:25:50][INFO] Searching Hellspy for "The Naked Gun 2025"...
+[2025-09-09 09:25:51][INFO] HTTP GET: https://api.hellspy.to/gw/search?query=The+Naked+Gun+2025&offset=0&limit=64
+[2025-09-09 09:25:51][INFO] HTTP response (truncated): {"items": [{"structType": "derivedObject", "objectType": "GWSearchVideo", "id": 18928314, "title": "The.Naked.Gun.2025.1080p", "fileHash": "d35eaa7841a03e52", "size": 6144877633, "duration": 4446, "thumbs": ["https://thumbs.hellspy.to/6/8/9/7/b/d//6897bd50c8ba6/1.jpg", "https://thumbs.hellspy.to/6/8/9/7/b/d//6897bd50c8ba6/2.jpg", "https://thumbs.hellspy.to/6/8/9/7/b/d//6897bd50c8ba6/3.jpg", "https://thumbs.hellspy.to/6/8/9/7/b/d//6897bd50c8ba6/4.jpg", "https://thumbs.hellspy.to/6/8/9/7/b/d//6897
+[2025-09-09 09:25:51][INFO] Found 22 items for "The Naked Gun 2025"
+[2025-09-09 09:25:51][INFO] Fetching stream for video 18928314 (d35eaa7841a03e52)
+[2025-09-09 09:25:53][INFO] HTTP GET: https://api.hellspy.to/gw/video/18928314/d35eaa7841a03e52
+[2025-09-09 09:25:53][INFO] HTTP response (truncated): {"structType": "derivedObject", "objectType": "GWVideo", "id": 18928314, "title": "The.Naked.Gun.2025.1080p", "fileHash": "d35eaa7841a03e52", "size": 6144877633, "duration": 4446, "thumbs": ["https://thumbs.hellspy.to/6/8/9/7/b/d//6897bd50c8ba6/1.jpg"], "filename": "The.Naked.Gun.2025.1080p.1080p", "conversions": {"720": "https://storage3.onecdn1.net/143339924/ErasElc1VfZrtbRSBmcQ9c69iy2FZjHy0HgRIr0uA5iXGCj1SAYHJ4hyZCaeSlxt0khEaCl1SYzUZ1T02Ig5U7xH1ahv3spGsYzirGCavCVEIzpflBiVm.mp4?token=A1206ZyNV
+[2025-09-09 09:25:53][INFO] Video: "The.Naked.Gun.2025.1080p" duration 4446 s
+[2025-09-09 09:25:53][INFO] Found 1 qualities for 18928314
+[2025-09-09 09:25:53][INFO] Fetching stream for video 18950467 (de67c86bc064c9d8)
+[2025-09-09 09:25:54][INFO] HTTP GET: https://api.hellspy.to/gw/video/18950467/de67c86bc064c9d8
+[2025-09-09 09:25:54][INFO] HTTP response (truncated): {"structType": "derivedObject", "objectType": "GWVideo", "id": 18950467, "title": "The.Naked.Gun.2025.1080p", "fileHash": "de67c86bc064c9d8", "size": 6144877633, "duration": 4446, "thumbs": ["https://thumbs.hellspy.to/6/8/9/b/8/a//689b8a044627c/1.jpg"], "filename": "The.Naked.Gun.2025.1080p.1080p", "conversions": {"720": "https://storage3.onecdn1.net/143525204/y2RTApH6GFWRU1etB8HB5HG9iOJFaBSkvFqKIwXSjWiJGi6ofvjFNrhdvCDofE1uJRhZ5CAxfbQUROsK9S5kUmahyeh52T8pT0wiKJCBqCopIMNto4i9M.mp4?token=A1206ZyNV
+[2025-09-09 09:25:54][INFO] Video: "The.Naked.Gun.2025.1080p" duration 4446 s
+[2025-09-09 09:25:54][INFO] Found 1 qualities for 18950467
+[2025-09-09 09:25:54][INFO] Fetching stream for video 18950532 (ca514af21f5a18bb)
+[2025-09-09 09:25:56][INFO] HTTP GET: https://api.hellspy.to/gw/video/18950532/ca514af21f5a18bb
+[2025-09-09 09:25:56][INFO] HTTP response (truncated): {"structType": "derivedObject", "objectType": "GWVideo", "id": 18950532, "title": "The.Naked.Gun.2025.1080p", "fileHash": "ca514af21f5a18bb", "size": 6144877633, "duration": 4446, "thumbs": ["https://thumbs.hellspy.to/6/8/9/b/8/c//689b8c9d1ac28/1.jpg"], "filename": "The.Naked.Gun.2025.1080p.1080p", "conversions": {"720": "https://storage3.onecdn1.net/143525555/v03hpmHzohRxtAvhNJc4KHa0iVKud5t8yh01IB5uvdiJBiDyfK9hY2sgrCadf98u5wsWkCo4fDYUrqFD3S68UxGsvPsaNcXBc7bi3dCzoCnzImyS7jioE.mp4?token=A1206ZyNV
+[2025-09-09 09:25:56][INFO] Video: "The.Naked.Gun.2025.1080p" duration 4446 s
+[2025-09-09 09:25:56][INFO] Found 1 qualities for 18950532
+[2025-09-09 09:25:56][INFO] Fetching stream for video 19228122 (84d1df12bb97b400)
+[2025-09-09 09:25:57][INFO] HTTP GET: https://api.hellspy.to/gw/video/19228122/84d1df12bb97b400
+[2025-09-09 09:25:57][INFO] HTTP response (truncated): {"structType": "derivedObject", "objectType": "GWVideo", "id": 19228122, "title": "The.Naked.Gun.2025.1080p.WEB.h264-ETHEL", "fileHash": "84d1df12bb97b400", "size": 4724180230, "duration": 5112, "thumbs": ["https://thumbs.hellspy.to/6/8/b/d/0/8//68bd089dd32b2/1.jpg"], "filename": "The.Naked.Gun.2025.1080p.WEB.h264-ETHEL.h264-ethel", "conversions": {"720": "https://storage4.onecdn1.net/145657209/8mWhpouGMIXgtqLHlpfm0unJHYLIz5Fm4HW0tvLHM8iAliymFqWCArhxeh14U8jhnQUlmTObC5lHZOTKncX3SZrU2WSxOUQJiDZFAg
+[2025-09-09 09:25:57][INFO] Video: "The.Naked.Gun.2025.1080p.WEB.h264-ETHEL" duration 5112 s
+[2025-09-09 09:25:57][INFO] Found 1 qualities for 19228122
+[2025-09-09 09:25:57][INFO] Fetching stream for video 18950529 (4fa37b0c6c50952c)
+[2025-09-09 09:25:58][INFO] HTTP GET: https://api.hellspy.to/gw/video/18950529/4fa37b0c6c50952c
+[2025-09-09 09:25:58][INFO] HTTP response (truncated): {"structType": "derivedObject", "objectType": "GWVideo", "id": 18950529, "title": "The.Naked.Gun.2025.1080p", "fileHash": "4fa37b0c6c50952c", "size": 6144877633, "duration": 4446, "thumbs": ["https://thumbs.hellspy.to/6/8/9/b/8/c//689b8c8f35988/1.jpg"], "filename": "The.Naked.Gun.2025.1080p.1080p", "conversions": {"720": "https://storage3.onecdn1.net/143525612/RyDhrWsOVH0nuK6sbDS9Vs61iz1HMLT1jSr9IGpceEi3BHWBfzxS5GTgMCd9fmbukvTgMC6zfDrU1bCOYF9GUYnTbjTpxhYeh9bi0pCZ2Cr5Io7tRJiGZ.mp4?token=A1206ZyNV
+[2025-09-09 09:25:58][INFO] Video: "The.Naked.Gun.2025.1080p" duration 4446 s
+[2025-09-09 09:25:58][INFO] Found 1 qualities for 18950529
+[2025-09-09 09:25:58][INFO] Returning 5 streams
+[2025-09-09 12:13:45][START] addon.php loaded
+[2025-09-09 12:36:19][INFO] START addon.php loaded
+[2025-09-09 12:36:26][INFO] START addon.php loaded
+[2025-09-09 12:36:56][INFO] START addon.php loaded
+[2025-09-09 12:51:49][INFO] START addon.php loaded
+[2025-09-09 12:51:54][INFO] START addon.php loaded
+[2025-09-09 13:02:17][START] addon.php loaded
+[2025-09-09 13:02:28][START] addon.php loaded
+[2025-09-09 13:02:33][START] addon.php loaded
+[2025-09-09 13:02:33][INFO] Stremio GET stream: type=movie id=tt28996126
+[2025-09-09 13:02:33][INFO] Stream request: type=movie id=tt28996126 name=tt28996126 episode=null
+[2025-09-09 13:02:33][INFO] Fetching titles for tt28996126 from Wikidata
+[2025-09-09 13:02:34][INFO] HTTP GET: https://query.wikidata.org/sparql?query=%0A++++++++++++++SELECT+%3Ffilm+%3FfilmLabel+%3ForiginalTitle+%3FpublicationDate+%3FinstanceLabel+WHERE+%7B%0A++++++++++++++++%3Ffilm+wdt%3AP345+%22tt28996126%22.%0A++++++++++++++++OPTIONAL+%7B+%3Ffilm+wdt%3AP1476+%3ForiginalTitle.+%7D%0A++++++++++++++++OPTIONAL+%7B+%3Ffilm+wdt%3AP577+%3FpublicationDate.+%7D%0A++++++++++++++++OPTIONAL+%7B+%3Ffilm+wdt%3AP31+%3Finstance.+%7D%0A++++++++++++++++SERVICE+wikibase%3Alabel+%7B+bd%3AserviceParam+wikibase%3Alanguage+%22cs%22.+%7D%0A++++++++++++++%7D%0A++++++++++++
+[2025-09-09 13:02:34][INFO] HTTP response (truncated): {
+  "head" : {
+    "vars" : [ "film", "filmLabel", "originalTitle", "publicationDate", "instanceLabel" ]
+  },
+  "results" : {
+    "bindings" : [ {
+      "film" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q126682448"
+      },
+      "originalTitle" : {
+        "xml:lang" : "en",
+        "type" : "literal",
+        "value" : "Nobody 2"
+      },
+      "publicationDate" : {
+        "datatype" : "http://www.w3.org/2001/XMLSchema#dateTime",
+        "type" : "literal",
+
+[2025-09-09 13:02:36][INFO] HTTP GET: https://query.wikidata.org/sparql?query=%0A++++++++++++++SELECT+%3Ffilm+%3FfilmLabel+%3ForiginalTitle+%3FpublicationDate+%3FinstanceLabel+WHERE+%7B%0A++++++++++++++++%3Ffilm+wdt%3AP345+%22tt28996126%22.%0A++++++++++++++++OPTIONAL+%7B+%3Ffilm+wdt%3AP1476+%3ForiginalTitle.+%7D%0A++++++++++++++++OPTIONAL+%7B+%3Ffilm+wdt%3AP577+%3FpublicationDate.+%7D%0A++++++++++++++++OPTIONAL+%7B+%3Ffilm+wdt%3AP31+%3Finstance.+%7D%0A++++++++++++++++SERVICE+wikibase%3Alabel+%7B+bd%3AserviceParam+wikibase%3Alanguage+%22en%22.+%7D%0A++++++++++++++%7D%0A++++++++++++
+[2025-09-09 13:02:36][INFO] HTTP response (truncated): {
+  "head" : {
+    "vars" : [ "film", "filmLabel", "originalTitle", "publicationDate", "instanceLabel" ]
+  },
+  "results" : {
+    "bindings" : [ {
+      "film" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q126682448"
+      },
+      "originalTitle" : {
+        "xml:lang" : "en",
+        "type" : "literal",
+        "value" : "Nobody 2"
+      },
+      "publicationDate" : {
+        "datatype" : "http://www.w3.org/2001/XMLSchema#dateTime",
+        "type" : "literal",
+
+[2025-09-09 13:02:36][INFO] Wikidata resolved: EN=Nobody 2, CZ=, Year=2025
+[2025-09-09 13:02:36][INFO] Searching Hellspy for "Nobody 2 2025"...
+[2025-09-09 13:02:38][INFO] HTTP GET: https://api.hellspy.to/gw/search?query=Nobody+2+2025&offset=0&limit=64
+[2025-09-09 13:02:38][INFO] HTTP response (truncated): {"items": [{"structType": "derivedObject", "objectType": "GWSearchVideo", "id": 19256613, "title": "Nobody 2 2025 1080p WEB-DL HEVC x265 5.1 CZ titulky", "fileHash": "df0736f48607f063", "size": 1445402474, "duration": 5372, "thumbs": ["https://thumbs.hellspy.to/6/8/b/f/7/7//68bf772683686/1.jpg", "https://thumbs.hellspy.to/6/8/b/f/7/7//68bf772683686/2.jpg", "https://thumbs.hellspy.to/6/8/b/f/7/7//68bf772683686/3.jpg", "https://thumbs.hellspy.to/6/8/b/f/7/7//68bf772683686/4.jpg", "https://thumbs.h
+[2025-09-09 13:02:38][INFO] Found 14 items for "Nobody 2 2025"
+[2025-09-09 13:02:38][INFO] Fetching stream for video 19256613 (df0736f48607f063)
+[2025-09-09 13:02:39][INFO] HTTP GET: https://api.hellspy.to/gw/video/19256613/df0736f48607f063
+[2025-09-09 13:02:39][INFO] HTTP response (truncated): {"structType": "derivedObject", "objectType": "GWVideo", "id": 19256613, "title": "Nobody 2 2025 1080p WEB-DL HEVC x265 5.1 CZ titulky", "fileHash": "df0736f48607f063", "size": 1445402474, "duration": 5372, "thumbs": ["https://thumbs.hellspy.to/6/8/b/f/7/7//68bf772683686/1.jpg"], "filename": "Nobody 2 2025 1080p WEB-DL HEVC x265 5.1 CZ titulky.mkv", "conversions": {"720": "https://storage4.onecdn1.net/145869804/ob8tOLhBMf4ZiJ5SmpSKYhrACqDHZWIjNcbEf6xIBMtvRUa8tzDUQ8s6DCZNFzGUvAuNmTZgH5xUX5fAEUzdC
+[2025-09-09 13:02:39][INFO] Video: "Nobody 2 2025 1080p WEB-DL HEVC x265 5.1 CZ titulky" duration 5372 s
+[2025-09-09 13:02:39][INFO] Found 1 qualities for 19256613
+[2025-09-09 13:02:39][INFO] Fetching stream for video 19257837 (31c4407fd16fbeb1)
+[2025-09-09 13:02:40][INFO] HTTP GET: https://api.hellspy.to/gw/video/19257837/31c4407fd16fbeb1
+[2025-09-09 13:02:40][INFO] HTTP response (truncated): {"structType": "derivedObject", "objectType": "GWVideo", "id": 19257837, "title": "Nobody 2 2025 1080p CZ titulky", "fileHash": "31c4407fd16fbeb1", "size": 1445402474, "duration": 5372, "thumbs": ["https://thumbs.hellspy.to/6/8/b/f/9/5//68bf95d0003d8/1.jpg"], "filename": "Nobody 2 2025 1080p CZ titulky.mkv", "conversions": {"720": "https://storage4.onecdn1.net/145879335/oepiM8UGgIOwU3wFo8hAZUXkCVyHLZI0VcEAivAIwYFaVSpMirbS9Ysjquq0uP7SLMfQ2TMJHrVFaYf9jSoVC78Sg0i6JCdKso3C0jUAJTXxT83TbRsLA.mp4?token
+[2025-09-09 13:02:40][INFO] Video: "Nobody 2 2025 1080p CZ titulky" duration 5372 s
+[2025-09-09 13:02:40][INFO] Found 1 qualities for 19257837
+[2025-09-09 13:02:40][INFO] Fetching stream for video 19256611 (a32fa052683aebe5)
+[2025-09-09 13:02:42][INFO] HTTP GET: https://api.hellspy.to/gw/video/19256611/a32fa052683aebe5
+[2025-09-09 13:02:42][INFO] HTTP response (truncated): {"structType": "derivedObject", "objectType": "GWVideo", "id": 19256611, "title": "Nobody 2 2025 1080p WEB-DL HEVC x265 5.1 CZ titulky", "fileHash": "a32fa052683aebe5", "size": 1445402474, "duration": 5372, "thumbs": ["https://thumbs.hellspy.to/6/8/b/f/7/7//68bf7720b2c48/1.jpg"], "filename": "Nobody 2 2025 1080p WEB-DL HEVC x265 5.1 CZ titulky.mkv", "conversions": {"720": "https://storage4.onecdn1.net/145869810/qmvtgeSynsgrf6JI8VspkSLVCGNHXvIDkclwf7YIGeiPwU5LtxBUXZulPs2gsYyUlmiBYTP5H65TeyfE2UjvC
+[2025-09-09 13:02:42][INFO] Video: "Nobody 2 2025 1080p WEB-DL HEVC x265 5.1 CZ titulky" duration 5372 s
+[2025-09-09 13:02:42][INFO] Found 1 qualities for 19256611
+[2025-09-09 13:02:42][INFO] Fetching stream for video 19257831 (e76918835e0e201d)
+[2025-09-09 13:02:43][INFO] HTTP GET: https://api.hellspy.to/gw/video/19257831/e76918835e0e201d
+[2025-09-09 13:02:43][INFO] HTTP response (truncated): {"structType": "derivedObject", "objectType": "GWVideo", "id": 19257831, "title": "Nobody 2 2025 1080p CZ titulky", "fileHash": "e76918835e0e201d", "size": 1445402474, "duration": 5372, "thumbs": ["https://thumbs.hellspy.to/6/8/b/f/9/5//68bf9598a83e1/1.jpg"], "filename": "Nobody 2 2025 1080p CZ titulky.mkv", "conversions": {"720": "https://storage4.onecdn1.net/145879326/onViwPs3mUKbS9mSBjsgksOmCxvHVoI5ocDrToZIgQuzoS9miD7SEote0hvqhZdSPjug9TQ6HlVuYZfvRSadCybSkriz0CLdtAbCo8uLOTYwTozTOAtZg.mp4?token
+[2025-09-09 13:02:43][INFO] Video: "Nobody 2 2025 1080p CZ titulky" duration 5372 s
+[2025-09-09 13:02:43][INFO] Found 1 qualities for 19257831
+[2025-09-09 13:02:43][INFO] Fetching stream for video 19258228 (ba8497014b30c782)
+[2025-09-09 13:02:44][INFO] HTTP GET: https://api.hellspy.to/gw/video/19258228/ba8497014b30c782
+[2025-09-09 13:02:44][INFO] HTTP response (truncated): {"structType": "derivedObject", "objectType": "GWVideo", "id": 19258228, "title": "Nobody 2 2025 1080p CZ titulky", "fileHash": "ba8497014b30c782", "size": 1445402474, "duration": 5372, "thumbs": ["https://thumbs.hellspy.to/6/8/b/f/9/d//68bf9dc1c6563/1.jpg"], "filename": "Nobody 2 2025 1080p CZ titulky.mkv", "conversions": {"720": "https://storage4.onecdn1.net/145882473/wq2uBWFr6sj3f2dSPMFmKFEmCVpHbQIVjcVLS0WIMGHyghZ7uxrh3LT0nFKjsBghPBUQRiw8HKnsy5fOQh23tLyh8BuWJC2ZTxYC6jC2biwxidaiYRTpY.mp4?token
+[2025-09-09 13:02:44][INFO] Video: "Nobody 2 2025 1080p CZ titulky" duration 5372 s
+[2025-09-09 13:02:44][INFO] Found 1 qualities for 19258228
+[2025-09-09 13:02:44][INFO] Returning 5 streams
+[2025-09-09 13:03:05][START] addon.php loaded
+[2025-09-09 13:03:05][INFO] Stremio GET stream: type=movie id=tt3402138
+[2025-09-09 13:03:05][INFO] Stream request: type=movie id=tt3402138 name=tt3402138 episode=null
+[2025-09-09 13:03:05][INFO] Fetching titles for tt3402138 from Wikidata
+[2025-09-09 13:03:05][INFO] HTTP GET: https://query.wikidata.org/sparql?query=%0A++++++++++++++SELECT+%3Ffilm+%3FfilmLabel+%3ForiginalTitle+%3FpublicationDate+%3FinstanceLabel+WHERE+%7B%0A++++++++++++++++%3Ffilm+wdt%3AP345+%22tt3402138%22.%0A++++++++++++++++OPTIONAL+%7B+%3Ffilm+wdt%3AP1476+%3ForiginalTitle.+%7D%0A++++++++++++++++OPTIONAL+%7B+%3Ffilm+wdt%3AP577+%3FpublicationDate.+%7D%0A++++++++++++++++OPTIONAL+%7B+%3Ffilm+wdt%3AP31+%3Finstance.+%7D%0A++++++++++++++++SERVICE+wikibase%3Alabel+%7B+bd%3AserviceParam+wikibase%3Alanguage+%22cs%22.+%7D%0A++++++++++++++%7D%0A++++++++++++
+[2025-09-09 13:03:05][INFO] HTTP response (truncated): {
+  "head" : {
+    "vars" : [ "film", "filmLabel", "originalTitle", "publicationDate", "instanceLabel" ]
+  },
+  "results" : {
+    "bindings" : [ {
+      "film" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q125908027"
+      },
+      "originalTitle" : {
+        "xml:lang" : "en",
+        "type" : "literal",
+        "value" : "The Naked Gun"
+      },
+      "publicationDate" : {
+        "datatype" : "http://www.w3.org/2001/XMLSchema#dateTime",
+        "type" : "liter
+[2025-09-09 13:03:07][INFO] HTTP GET: https://query.wikidata.org/sparql?query=%0A++++++++++++++SELECT+%3Ffilm+%3FfilmLabel+%3ForiginalTitle+%3FpublicationDate+%3FinstanceLabel+WHERE+%7B%0A++++++++++++++++%3Ffilm+wdt%3AP345+%22tt3402138%22.%0A++++++++++++++++OPTIONAL+%7B+%3Ffilm+wdt%3AP1476+%3ForiginalTitle.+%7D%0A++++++++++++++++OPTIONAL+%7B+%3Ffilm+wdt%3AP577+%3FpublicationDate.+%7D%0A++++++++++++++++OPTIONAL+%7B+%3Ffilm+wdt%3AP31+%3Finstance.+%7D%0A++++++++++++++++SERVICE+wikibase%3Alabel+%7B+bd%3AserviceParam+wikibase%3Alanguage+%22en%22.+%7D%0A++++++++++++++%7D%0A++++++++++++
+[2025-09-09 13:03:07][INFO] HTTP response (truncated): {
+  "head" : {
+    "vars" : [ "film", "filmLabel", "originalTitle", "publicationDate", "instanceLabel" ]
+  },
+  "results" : {
+    "bindings" : [ {
+      "film" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q125908027"
+      },
+      "originalTitle" : {
+        "xml:lang" : "en",
+        "type" : "literal",
+        "value" : "The Naked Gun"
+      },
+      "publicationDate" : {
+        "datatype" : "http://www.w3.org/2001/XMLSchema#dateTime",
+        "type" : "liter
+[2025-09-09 13:03:07][INFO] Wikidata resolved: EN=The Naked Gun, CZ=Bláznivá střela, Year=2025
+[2025-09-09 13:03:07][INFO] Searching Hellspy for "Bláznivá střela 2025"...
+[2025-09-09 13:03:08][INFO] HTTP GET: https://api.hellspy.to/gw/search?query=Bl%C3%A1zniv%C3%A1+st%C5%99ela+2025&offset=0&limit=64
+[2025-09-09 13:03:08][INFO] HTTP response (truncated): {"items": [{"structType": "derivedObject", "objectType": "GWSearchVideo", "id": 19240944, "title": "Bl\u00e1zniv\u00e1 st\u0159ela  2025 Cz titulky ", "fileHash": "067239f1be1af612", "size": 2915886792, "duration": 5180, "thumbs": ["https://thumbs.hellspy.to/6/8/b/e/5/6//68be56a52295d/1.jpg", "https://thumbs.hellspy.to/6/8/b/e/5/6//68be56a52295d/2.jpg", "https://thumbs.hellspy.to/6/8/b/e/5/6//68be56a52295d/3.jpg", "https://thumbs.hellspy.to/6/8/b/e/5/6//68be56a52295d/4.jpg", "https://thumbs.hell
+[2025-09-09 13:03:08][INFO] Found 3 items for "Bláznivá střela 2025"
+[2025-09-09 13:03:08][INFO] Fetching stream for video 19240944 (067239f1be1af612)
+[2025-09-09 13:03:10][INFO] HTTP GET: https://api.hellspy.to/gw/video/19240944/067239f1be1af612
+[2025-09-09 13:03:10][INFO] HTTP response (truncated): {"structType": "derivedObject", "objectType": "GWVideo", "id": 19240944, "title": "Bl\u00e1zniv\u00e1 st\u0159ela  2025 Cz titulky ", "fileHash": "067239f1be1af612", "size": 2915886792, "duration": 5180, "thumbs": ["https://thumbs.hellspy.to/6/8/b/e/5/6//68be56a52295d/1.jpg"], "filename": "Bl\u00e1zniv\u00e1 st\u0159ela  2025 Cz titulky .mkv", "conversions": {"720": "https://storage4.onecdn1.net/145751727/RpLSXJHDMheRu3YTyeFApHzJtjMIe3FAXSL5FQYUpPTz2tvoFKAUy1U1JcdqSEJsE8S6wIz2iPLipyUdLh7XU5JcMri
+[2025-09-09 13:03:10][INFO] Video: "Bláznivá střela  2025 Cz titulky " duration 5180 s
+[2025-09-09 13:03:10][INFO] Found 1 qualities for 19240944
+[2025-09-09 13:03:10][INFO] Fetching stream for video 19253394 (612bcb0608085372)
+[2025-09-09 13:03:11][INFO] HTTP GET: https://api.hellspy.to/gw/video/19253394/612bcb0608085372
+[2025-09-09 13:03:11][INFO] HTTP response (truncated): {"structType": "derivedObject", "objectType": "GWVideo", "id": 19253394, "title": " Bl\u00e1zniv\u00e1 St\u0159ela 2025 HD EN cz tit ", "fileHash": "612bcb0608085372", "size": 6295947023, "duration": 5180, "thumbs": ["https://thumbs.hellspy.to/6/8/b/f/3/0//68bf30e8e55bd/1.jpg"], "filename": " Bl\u00e1zniv\u00e1 St\u0159ela 2025 HD EN cz tit .mkv", "conversions": {"720": "https://storage4.onecdn1.net/145845765/L90sKQT5vSVoIobU1ntoZT48Um3hAyCMjH0As2OF8dUavuzpcdXUbEUxmcd1I0mFarFx9cLbFQEs3OHqpfEwcyp
+[2025-09-09 13:03:11][INFO] Video: " Bláznivá Střela 2025 HD EN cz tit " duration 5180 s
+[2025-09-09 13:03:11][INFO] Found 1 qualities for 19253394
+[2025-09-09 13:03:11][INFO] Fetching stream for video 19256800 (b600f33606568d8f)
+[2025-09-09 13:03:12][INFO] HTTP GET: https://api.hellspy.to/gw/video/19256800/b600f33606568d8f
+[2025-09-09 13:03:12][INFO] HTTP response (truncated): {"structType": "derivedObject", "objectType": "GWVideo", "id": 19256800, "title": "Bl\u00e1zniv\u00e1.st\u0159ela,2025,Komedie,CZtitulky.v.obraze", "fileHash": "b600f33606568d8f", "size": 2915886792, "duration": 5180, "thumbs": ["https://thumbs.hellspy.to/6/8/b/f/7/b//68bf7be633329/1.jpg"], "filename": "Bl\u00e1zniv\u00e1.st\u0159ela,2025,Komedie,CZtitulky.v.obraze.mkv", "conversions": {"720": "https://storage4.onecdn1.net/145871832/5RLtJMsPGu4efo3i3PUxwsy1TQDIw4UQXtJQUWEHdGFznT30UK1HB7HQOcyrtz1
+[2025-09-09 13:03:12][INFO] Video: "Bláznivá.střela,2025,Komedie,CZtitulky.v.obraze" duration 5180 s
+[2025-09-09 13:03:12][INFO] Found 1 qualities for 19256800
+[2025-09-09 13:03:12][INFO] Returning 3 streams
+[2025-09-09 13:27:54][START] addon.php loaded
+[2025-09-09 13:27:54][START] addon.php loaded
+[2025-09-09 13:28:16][START] addon.php loaded
+[2025-09-09 13:28:26][START] addon.php loaded
+[2025-09-09 13:28:26][INFO] Stremio GET stream: type=movie id=tt5950044
+[2025-09-09 13:28:26][INFO] Stream request: type=movie id=tt5950044 name=tt5950044 episode=null
+[2025-09-09 13:28:26][INFO] Fetching titles for tt5950044 from Wikidata
+[2025-09-09 13:28:27][INFO] HTTP GET: https://query.wikidata.org/sparql?query=%0A++++++++++++++SELECT+%3Ffilm+%3FfilmLabel+%3ForiginalTitle+%3FpublicationDate+%3FinstanceLabel+WHERE+%7B%0A++++++++++++++++%3Ffilm+wdt%3AP345+%22tt5950044%22.%0A++++++++++++++++OPTIONAL+%7B+%3Ffilm+wdt%3AP1476+%3ForiginalTitle.+%7D%0A++++++++++++++++OPTIONAL+%7B+%3Ffilm+wdt%3AP577+%3FpublicationDate.+%7D%0A++++++++++++++++OPTIONAL+%7B+%3Ffilm+wdt%3AP31+%3Finstance.+%7D%0A++++++++++++++++SERVICE+wikibase%3Alabel+%7B+bd%3AserviceParam+wikibase%3Alanguage+%22cs%22.+%7D%0A++++++++++++++%7D%0A++++++++++++
+[2025-09-09 13:28:27][INFO] HTTP response (truncated): {
+  "head" : {
+    "vars" : [ "film", "filmLabel", "originalTitle", "publicationDate", "instanceLabel" ]
+  },
+  "results" : {
+    "bindings" : [ {
+      "film" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q116547790"
+      },
+      "originalTitle" : {
+        "xml:lang" : "en",
+        "type" : "literal",
+        "value" : "Superman"
+      },
+      "publicationDate" : {
+        "datatype" : "http://www.w3.org/2001/XMLSchema#dateTime",
+        "type" : "literal",
+
+[2025-09-09 13:28:28][INFO] HTTP GET: https://query.wikidata.org/sparql?query=%0A++++++++++++++SELECT+%3Ffilm+%3FfilmLabel+%3ForiginalTitle+%3FpublicationDate+%3FinstanceLabel+WHERE+%7B%0A++++++++++++++++%3Ffilm+wdt%3AP345+%22tt5950044%22.%0A++++++++++++++++OPTIONAL+%7B+%3Ffilm+wdt%3AP1476+%3ForiginalTitle.+%7D%0A++++++++++++++++OPTIONAL+%7B+%3Ffilm+wdt%3AP577+%3FpublicationDate.+%7D%0A++++++++++++++++OPTIONAL+%7B+%3Ffilm+wdt%3AP31+%3Finstance.+%7D%0A++++++++++++++++SERVICE+wikibase%3Alabel+%7B+bd%3AserviceParam+wikibase%3Alanguage+%22en%22.+%7D%0A++++++++++++++%7D%0A++++++++++++
+[2025-09-09 13:28:28][INFO] HTTP response (truncated): {
+  "head" : {
+    "vars" : [ "film", "filmLabel", "originalTitle", "publicationDate", "instanceLabel" ]
+  },
+  "results" : {
+    "bindings" : [ {
+      "film" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q116547790"
+      },
+      "originalTitle" : {
+        "xml:lang" : "en",
+        "type" : "literal",
+        "value" : "Superman"
+      },
+      "publicationDate" : {
+        "datatype" : "http://www.w3.org/2001/XMLSchema#dateTime",
+        "type" : "literal",
+
+[2025-09-09 13:28:28][INFO] Wikidata resolved: EN=Superman, CZ=Superman, Year=2025
+[2025-09-09 13:28:28][INFO] Searching Hellspy for "Superman 2025"...
+[2025-09-09 13:28:29][INFO] HTTP GET: https://api.hellspy.to/gw/search?query=Superman+2025&offset=0&limit=64
+[2025-09-09 13:28:29][INFO] HTTP response (truncated): {"items": [{"structType": "derivedObject", "objectType": "GWSearchVideo", "id": 6590171, "title": "Superman 2025 CZ dabing (kvalitn\u00ed kinorip)", "fileHash": "888652bb199cc4219e0f7171c1c468a1", "size": 4064817711, "duration": 7215, "thumbs": ["https://storage.hellspy.to/thumbs/575eba2e/777bc283/6590171/1-181529.jpg", "https://storage.hellspy.to/thumbs/575eba2e/777bc283/6590171/2-1051658.jpg", "https://storage.hellspy.to/thumbs/575eba2e/777bc283/6590171/3-1913995.jpg", "https://storage.hellspy
+[2025-09-09 13:28:29][INFO] Found 64 items for "Superman 2025"
+[2025-09-09 13:28:29][INFO] Fetching stream for video 6590171 (888652bb199cc4219e0f7171c1c468a1)
+[2025-09-09 13:28:31][INFO] HTTP GET: https://api.hellspy.to/gw/video/6590171/888652bb199cc4219e0f7171c1c468a1
+[2025-09-09 13:28:31][INFO] HTTP response (truncated): {"structType": "derivedObject", "objectType": "GWVideo", "id": 6590171, "title": "Superman 2025 CZ dabing (kvalitn\u00ed kinorip)", "fileHash": "888652bb199cc4219e0f7171c1c468a1", "size": 4064817711, "duration": 7215, "thumbs": ["https://storage.hellspy.to/thumbs/575eba2e/777bc283/6590171/1-181529.jpg", "https://storage.hellspy.to/thumbs/575eba2e/777bc283/6590171/2-1051658.jpg", "https://storage.hellspy.to/thumbs/575eba2e/777bc283/6590171/3-1913995.jpg", "https://storage.hellspy.to/thumbs/575eba
+[2025-09-09 13:28:31][INFO] Video: "Superman 2025 CZ dabing (kvalitní kinorip)" duration 7215 s
+[2025-09-09 13:28:31][INFO] Found 1 qualities for 6590171
+[2025-09-09 13:28:31][INFO] Fetching stream for video 19261565 (89d55e4ecde02a8d)
+[2025-09-09 13:28:32][INFO] HTTP GET: https://api.hellspy.to/gw/video/19261565/89d55e4ecde02a8d
+[2025-09-09 13:28:32][INFO] HTTP response (truncated): {"structType": "derivedObject", "objectType": "GWVideo", "id": 19261565, "title": "Superman (2025) - CZ DABING", "fileHash": "89d55e4ecde02a8d", "size": 4986725699, "duration": 7762, "thumbs": ["https://thumbs.hellspy.to/6/8/b/f/f/1//68bff133d3a79/1.jpg"], "filename": "Superman (2025) - CZ DABING.mp4", "conversions": {"720": "https://storage4.onecdn1.net/145908972/OxLTL6FazsB2uK5FvKi2KF63tbMh08IgbtblCrZTmgiqDfdgs53TjYf5ahR1HL7sREh8YC3Xt8giqMsx8IqRfgMiDkhLvsxpueZC6yi9diGOcBNhjXs0w.mp4?token=A1206
+[2025-09-09 13:28:32][INFO] Video: "Superman (2025) - CZ DABING" duration 7762 s
+[2025-09-09 13:28:32][INFO] Found 1 qualities for 19261565
+[2025-09-09 13:28:32][INFO] Fetching stream for video 19261789 (4e7c180fa3ea04a2)
+[2025-09-09 13:28:34][INFO] HTTP GET: https://api.hellspy.to/gw/video/19261789/4e7c180fa3ea04a2
+[2025-09-09 13:28:34][INFO] HTTP response (truncated): {"structType": "derivedObject", "objectType": "GWVideo", "id": 19261789, "title": " Superman 2025 HD CZ ", "fileHash": "4e7c180fa3ea04a2", "size": 10163225991, "duration": 7762, "thumbs": ["https://thumbs.hellspy.to/6/8/b/f/f/8//68bff8f50d3d8/1.jpg"], "filename": " Superman 2025 HD CZ .mkv", "conversions": {"720": "https://storage1.onecdn1.net/145910046/OWosbOHB8FdqFR5IE6inPHXZsr0Iedh5KsMPsQKfMjTrKTMjTbKtE4Iy7iDxClPUxgugLSB9Urjh68srWhvwh4pCapTm5Cpjhj2CGoC5ETR4FybTgZtQD.mp4?token=A1206ZyNVCax&exp
+[2025-09-09 13:28:34][INFO] Video: " Superman 2025 HD CZ " duration 7762 s
+[2025-09-09 13:28:34][INFO] Found 1 qualities for 19261789
+[2025-09-09 13:28:34][INFO] Fetching stream for video 19188567 (2f86137bdd0050a1)
+[2025-09-09 13:28:35][INFO] HTTP GET: https://api.hellspy.to/gw/video/19188567/2f86137bdd0050a1
+[2025-09-09 13:28:35][INFO] HTTP response (truncated): {"structType": "derivedObject", "objectType": "GWVideo", "id": 19188567, "title": "Superman 2025 CZ Dabing", "fileHash": "2f86137bdd0050a1", "size": 3317706045, "duration": 7762, "thumbs": ["https://thumbs.hellspy.to/6/8/b/8/9/c//68b89cef4a735/1.jpg"], "filename": "Superman 2025 CZ Dabing.mp4", "conversions": {"720": "https://storage4.onecdn1.net/145377945/LEjf0guGyIv7FR7IKvHRKumYcPvsEJIbWho9t6OsQ3FKkh4qCR4T72TKGi18i2wTbwfqKCWkC6rC02fn1fo3CgwIkPhDbsWNcMks19U7vHyehL5Tvyt1r.mp4?token=A1206ZyNVCax&
+[2025-09-09 13:28:35][INFO] Video: "Superman 2025 CZ Dabing" duration 7762 s
+[2025-09-09 13:28:35][INFO] Found 1 qualities for 19188567
+[2025-09-09 13:28:35][INFO] Fetching stream for video 19179582 (4eb65d7d857d1f62)
+[2025-09-09 13:28:36][INFO] HTTP GET: https://api.hellspy.to/gw/video/19179582/4eb65d7d857d1f62
+[2025-09-09 13:28:36][INFO] HTTP response (truncated): {"structType": "derivedObject", "objectType": "GWVideo", "id": 19179582, "title": "Superman 2025 CZ Dabing", "fileHash": "4eb65d7d857d1f62", "size": 3317706045, "duration": 7762, "thumbs": ["https://thumbs.hellspy.to/6/8/b/7/c/c//68b7cc5ea5e5c/1.jpg"], "filename": "Superman 2025 CZ Dabing.mp4", "conversions": {"720": "https://storage4.onecdn1.net/145317051/Lr4toBFa7iRPSZkU6jsmkFOJc7dfm8IyVueBU02flmC67u04CJ1iEVi1ah7eh1dupVt4EfaYCb0Crxt74t6wSq0IRLuaVfzZcBAfZJT6QHXnuZpiDEUVd.mp4?token=A1206ZyNVCax&
+[2025-09-09 13:28:36][INFO] Video: "Superman 2025 CZ Dabing" duration 7762 s
+[2025-09-09 13:28:36][INFO] Found 1 qualities for 19179582
+[2025-09-09 13:28:36][INFO] Returning 5 streams
+[2025-09-09 13:29:26][START] addon.php loaded
+[2025-09-09 13:29:26][INFO] Stremio GET stream: type=series id=tt13443470:1:1
+[2025-09-09 13:29:26][INFO] Stream request: type=series id=tt13443470:1:1 name=tt13443470:1:1 episode=null
+[2025-09-09 13:29:26][INFO] Fetching titles for tt13443470 from Wikidata
+[2025-09-09 13:29:27][INFO] HTTP GET: https://query.wikidata.org/sparql?query=%0A++++++++++++++SELECT+%3Ffilm+%3FfilmLabel+%3ForiginalTitle+%3FpublicationDate+%3FinstanceLabel+WHERE+%7B%0A++++++++++++++++%3Ffilm+wdt%3AP345+%22tt13443470%22.%0A++++++++++++++++OPTIONAL+%7B+%3Ffilm+wdt%3AP1476+%3ForiginalTitle.+%7D%0A++++++++++++++++OPTIONAL+%7B+%3Ffilm+wdt%3AP577+%3FpublicationDate.+%7D%0A++++++++++++++++OPTIONAL+%7B+%3Ffilm+wdt%3AP31+%3Finstance.+%7D%0A++++++++++++++++SERVICE+wikibase%3Alabel+%7B+bd%3AserviceParam+wikibase%3Alanguage+%22cs%22.+%7D%0A++++++++++++++%7D%0A++++++++++++
+[2025-09-09 13:29:27][INFO] HTTP response (truncated): {
+  "head" : {
+    "vars" : [ "film", "filmLabel", "originalTitle", "publicationDate", "instanceLabel" ]
+  },
+  "results" : {
+    "bindings" : [ {
+      "film" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q105553568"
+      },
+      "originalTitle" : {
+        "xml:lang" : "en",
+        "type" : "literal",
+        "value" : "Wednesday"
+      },
+      "filmLabel" : {
+        "xml:lang" : "cs",
+        "type" : "literal",
+        "value" : "Wednesday"
+      },
+     
+[2025-09-09 13:29:28][INFO] HTTP GET: https://query.wikidata.org/sparql?query=%0A++++++++++++++SELECT+%3Ffilm+%3FfilmLabel+%3ForiginalTitle+%3FpublicationDate+%3FinstanceLabel+WHERE+%7B%0A++++++++++++++++%3Ffilm+wdt%3AP345+%22tt13443470%22.%0A++++++++++++++++OPTIONAL+%7B+%3Ffilm+wdt%3AP1476+%3ForiginalTitle.+%7D%0A++++++++++++++++OPTIONAL+%7B+%3Ffilm+wdt%3AP577+%3FpublicationDate.+%7D%0A++++++++++++++++OPTIONAL+%7B+%3Ffilm+wdt%3AP31+%3Finstance.+%7D%0A++++++++++++++++SERVICE+wikibase%3Alabel+%7B+bd%3AserviceParam+wikibase%3Alanguage+%22en%22.+%7D%0A++++++++++++++%7D%0A++++++++++++
+[2025-09-09 13:29:28][INFO] HTTP response (truncated): {
+  "head" : {
+    "vars" : [ "film", "filmLabel", "originalTitle", "publicationDate", "instanceLabel" ]
+  },
+  "results" : {
+    "bindings" : [ {
+      "film" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q105553568"
+      },
+      "originalTitle" : {
+        "xml:lang" : "en",
+        "type" : "literal",
+        "value" : "Wednesday"
+      },
+      "filmLabel" : {
+        "xml:lang" : "en",
+        "type" : "literal",
+        "value" : "Wednesday"
+      },
+     
+[2025-09-09 13:29:28][INFO] Wikidata resolved: EN=Wednesday, CZ=Wednesday, Year=
+[2025-09-09 13:29:28][INFO] Searching Hellspy for "Wednesday S01E01"...
+[2025-09-09 13:29:30][INFO] HTTP GET: https://api.hellspy.to/gw/search?query=Wednesday+S01E01&offset=0&limit=64
+[2025-09-09 13:29:30][INFO] HTTP response (truncated): {"items": [{"structType": "derivedObject", "objectType": "GWSearchVideo", "id": 19258747, "title": "Wednesday S01E01 (2022) 720p CZ", "fileHash": "f44133332888ad91", "size": 922532241, "duration": 3570, "thumbs": ["https://thumbs.hellspy.to/6/8/b/f/a/c//68bfac09ec585/1.jpg", "https://thumbs.hellspy.to/6/8/b/f/a/c//68bfac09ec585/2.jpg", "https://thumbs.hellspy.to/6/8/b/f/a/c//68bfac09ec585/3.jpg", "https://thumbs.hellspy.to/6/8/b/f/a/c//68bfac09ec585/4.jpg", "https://thumbs.hellspy.to/6/8/b/f/a/c
+[2025-09-09 13:29:30][INFO] Found 5 items for "Wednesday S01E01"
+[2025-09-09 13:29:30][INFO] Fetching stream for video 19258747 (f44133332888ad91)
+[2025-09-09 13:29:31][INFO] HTTP GET: https://api.hellspy.to/gw/video/19258747/f44133332888ad91
+[2025-09-09 13:29:31][INFO] HTTP response (truncated): {"structType": "derivedObject", "objectType": "GWVideo", "id": 19258747, "title": "Wednesday S01E01 (2022) 720p CZ", "fileHash": "f44133332888ad91", "size": 922532241, "duration": 3570, "thumbs": ["https://thumbs.hellspy.to/6/8/b/f/a/c//68bfac09ec585/1.jpg"], "filename": "Wednesday S01E01 (2022) 720p CZ.mkv", "conversions": {"720": "https://storage4.onecdn1.net/145886667/l3ESD7fgwTavT52C7bUYofAEu4nhjdCZKin8F8ZswJu1xSwgT3Qcb1I6viMrSlEceOI7YcEyFELhPpHYBFd5CxeT7XtyETKrI6GiaLTyxsLDCylC3pILa.mp4?toke
+[2025-09-09 13:29:31][INFO] Video: "Wednesday S01E01 (2022) 720p CZ" duration 3570 s
+[2025-09-09 13:29:31][INFO] Found 1 qualities for 19258747
+[2025-09-09 13:29:31][INFO] Fetching stream for video 19258290 (54cd21156b879125)
+[2025-09-09 13:29:32][INFO] HTTP GET: https://api.hellspy.to/gw/video/19258290/54cd21156b879125
+[2025-09-09 13:29:32][INFO] HTTP response (truncated): {"structType": "derivedObject", "objectType": "GWVideo", "id": 19258290, "title": "Wednesday S01E01 (2022) 720p CZ", "fileHash": "54cd21156b879125", "size": 922532241, "duration": 3570, "thumbs": ["https://thumbs.hellspy.to/6/8/b/f/9/f//68bf9f1aba422/1.jpg"], "filename": "Wednesday S01E01 (2022) 720p CZ.mkv", "conversions": {"720": "https://storage4.onecdn1.net/145882881/nDRSvgsZpSzwfJ6tjRtwBsdEUPjhWgCLXi9ptAMiY6uM6Sl5ToncwVIpOixoSwacr2IlacALHevhl3H6Ztd5CZATaOFOlT2GIOjidJTKjfa5CoWCMwUEv.mp4?toke
+[2025-09-09 13:29:32][INFO] Video: "Wednesday S01E01 (2022) 720p CZ" duration 3570 s
+[2025-09-09 13:29:32][INFO] Found 1 qualities for 19258290
+[2025-09-09 13:29:32][INFO] Fetching stream for video 19258291 (837e3c8d6ccce4d7)
+[2025-09-09 13:29:34][INFO] HTTP GET: https://api.hellspy.to/gw/video/19258291/837e3c8d6ccce4d7
+[2025-09-09 13:29:34][INFO] HTTP response (truncated): {"structType": "derivedObject", "objectType": "GWVideo", "id": 19258291, "title": "Wednesday S01E01 (2022) 720p CZ", "fileHash": "837e3c8d6ccce4d7", "size": 922532241, "duration": 3570, "thumbs": ["https://thumbs.hellspy.to/6/8/b/f/9/f//68bf9f1aba41c/1.jpg"], "filename": "Wednesday S01E01 (2022) 720p CZ.mkv", "conversions": {"720": "https://storage4.onecdn1.net/145882884/RjPS1PUJmhBlTpOszgtL2U9XiMmIeyCPViLYtAwiR1s08inVup1cMaIk4il6S5QcxyIg9cL7szlhAYHZ6ta0CkjuQ9TO4uR8IKni2au4nuoDCxAC3lIVN.mp4?toke
+[2025-09-09 13:29:34][INFO] Video: "Wednesday S01E01 (2022) 720p CZ" duration 3570 s
+[2025-09-09 13:29:34][INFO] Found 1 qualities for 19258291
+[2025-09-09 13:29:34][INFO] Fetching stream for video 19257814 (f59fcf8636656bc2)
+[2025-09-09 13:29:35][INFO] HTTP GET: https://api.hellspy.to/gw/video/19257814/f59fcf8636656bc2
+[2025-09-09 13:29:35][INFO] HTTP response (truncated): {"structType": "derivedObject", "objectType": "GWVideo", "id": 19257814, "title": "Wednesday S01E01 (2022) 720p CZ", "fileHash": "f59fcf8636656bc2", "size": 922532241, "duration": 3570, "thumbs": ["https://thumbs.hellspy.to/6/8/b/f/9/5//68bf952c6e46d/1.jpg"], "filename": "Wednesday S01E01 (2022) 720p CZ.mkv", "conversions": {"720": "https://storage4.onecdn1.net/145879092/n2psy3FGyIbeUJltdBtn9F9ETNqcXvCZATlotZJhYzUXZUdWhXecKqIJVTdOsZlcV8I7ocgyULXSMeH0VtQGCAxhgoiQVhqLIAQTP1hOdflbCbNCMzuV0.mp4?toke
+[2025-09-09 13:29:35][INFO] Video: "Wednesday S01E01 (2022) 720p CZ" duration 3570 s
+[2025-09-09 13:29:35][INFO] Found 1 qualities for 19257814
+[2025-09-09 13:29:35][INFO] Fetching stream for video 19257919 (e417f7f830677c27)
+[2025-09-09 13:29:36][INFO] HTTP GET: https://api.hellspy.to/gw/video/19257919/e417f7f830677c27
+[2025-09-09 13:29:36][INFO] HTTP response (truncated): {"structType": "derivedObject", "objectType": "GWVideo", "id": 19257919, "title": "Wednesday S01E01 (2022) 720p CZ", "fileHash": "e417f7f830677c27", "size": 922532241, "duration": 3570, "thumbs": ["https://thumbs.hellspy.to/6/8/b/f/9/7//68bf977404fa6/1.jpg"], "filename": "Wednesday S01E01 (2022) 720p CZ.mkv", "conversions": {"720": "https://storage4.onecdn1.net/145879839/9W2uVzUJoSw1txmh5BFmDU07taqCNjCgLT5kfMBH7xhqGhegsJXcWrIkjT3EudxcZDIwkcrZha5SWkHkaflGCGBsdVFeZs5PI3gTlWsnXtMmCmjC04s2p.mp4?toke
+[2025-09-09 13:29:36][INFO] Video: "Wednesday S01E01 (2022) 720p CZ" duration 3570 s
+[2025-09-09 13:29:36][INFO] Found 1 qualities for 19257919
+[2025-09-09 13:29:36][INFO] Returning 5 streams
+[2025-09-09 13:30:14][START] addon.php loaded
+[2025-09-09 13:30:14][INFO] Stremio GET stream: type=series id=tt13443470:1:1
+[2025-09-09 13:30:14][INFO] Stream request: type=series id=tt13443470:1:1 name=tt13443470:1:1 episode=null
+[2025-09-09 13:30:14][INFO] Returning 5 streams
+[2025-09-09 16:18:20][START] addon.php loaded
+[2025-09-09 16:18:20][INFO] Stremio GET stream: type=series id=tt13443470:1:3
+[2025-09-09 16:18:20][INFO] Stream request: type=series id=tt13443470:1:3 name=tt13443470:1:3 episode=null
+[2025-09-09 16:18:20][INFO] Fetching titles for tt13443470 from Wikidata
+[2025-09-09 16:18:21][INFO] HTTP GET: https://query.wikidata.org/sparql?query=%0A++++++++++++++SELECT+%3Ffilm+%3FfilmLabel+%3ForiginalTitle+%3FpublicationDate+%3FinstanceLabel+WHERE+%7B%0A++++++++++++++++%3Ffilm+wdt%3AP345+%22tt13443470%22.%0A++++++++++++++++OPTIONAL+%7B+%3Ffilm+wdt%3AP1476+%3ForiginalTitle.+%7D%0A++++++++++++++++OPTIONAL+%7B+%3Ffilm+wdt%3AP577+%3FpublicationDate.+%7D%0A++++++++++++++++OPTIONAL+%7B+%3Ffilm+wdt%3AP31+%3Finstance.+%7D%0A++++++++++++++++SERVICE+wikibase%3Alabel+%7B+bd%3AserviceParam+wikibase%3Alanguage+%22cs%22.+%7D%0A++++++++++++++%7D%0A++++++++++++
+[2025-09-09 16:18:21][INFO] HTTP response (truncated): {
+  "head" : {
+    "vars" : [ "film", "filmLabel", "originalTitle", "publicationDate", "instanceLabel" ]
+  },
+  "results" : {
+    "bindings" : [ {
+      "film" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q105553568"
+      },
+      "originalTitle" : {
+        "xml:lang" : "en",
+        "type" : "literal",
+        "value" : "Wednesday"
+      },
+      "filmLabel" : {
+        "xml:lang" : "cs",
+        "type" : "literal",
+        "value" : "Wednesday"
+      },
+     
+[2025-09-09 16:18:22][INFO] HTTP GET: https://query.wikidata.org/sparql?query=%0A++++++++++++++SELECT+%3Ffilm+%3FfilmLabel+%3ForiginalTitle+%3FpublicationDate+%3FinstanceLabel+WHERE+%7B%0A++++++++++++++++%3Ffilm+wdt%3AP345+%22tt13443470%22.%0A++++++++++++++++OPTIONAL+%7B+%3Ffilm+wdt%3AP1476+%3ForiginalTitle.+%7D%0A++++++++++++++++OPTIONAL+%7B+%3Ffilm+wdt%3AP577+%3FpublicationDate.+%7D%0A++++++++++++++++OPTIONAL+%7B+%3Ffilm+wdt%3AP31+%3Finstance.+%7D%0A++++++++++++++++SERVICE+wikibase%3Alabel+%7B+bd%3AserviceParam+wikibase%3Alanguage+%22en%22.+%7D%0A++++++++++++++%7D%0A++++++++++++
+[2025-09-09 16:18:22][INFO] HTTP response (truncated): {
+  "head" : {
+    "vars" : [ "film", "filmLabel", "originalTitle", "publicationDate", "instanceLabel" ]
+  },
+  "results" : {
+    "bindings" : [ {
+      "film" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q105553568"
+      },
+      "originalTitle" : {
+        "xml:lang" : "en",
+        "type" : "literal",
+        "value" : "Wednesday"
+      },
+      "filmLabel" : {
+        "xml:lang" : "en",
+        "type" : "literal",
+        "value" : "Wednesday"
+      },
+     
+[2025-09-09 16:18:22][INFO] Wikidata resolved: EN=Wednesday, CZ=Wednesday, Year=
+[2025-09-09 16:18:22][INFO] Searching Hellspy for "Wednesday S01E03"...
+[2025-09-09 16:18:23][INFO] HTTP GET: https://api.hellspy.to/gw/search?query=Wednesday+S01E03&offset=0&limit=64
+[2025-09-09 16:18:23][INFO] HTTP response (truncated): {"items": [{"structType": "derivedObject", "objectType": "GWSearchVideo", "id": 19250635, "title": "Wednesday s01e03-08 CZdub- P\u0159\u00edtel nebo vrah 2022.", "fileHash": "98f944a3df29469c", "size": 2489664404, "duration": 2908, "thumbs": ["https://thumbs.hellspy.to/6/8/b/f/0/9//68bf09cd2ed47/1.jpg", "https://thumbs.hellspy.to/6/8/b/f/0/9//68bf09cd2ed47/2.jpg", "https://thumbs.hellspy.to/6/8/b/f/0/9//68bf09cd2ed47/3.jpg", "https://thumbs.hellspy.to/6/8/b/f/0/9//68bf09cd2ed47/4.jpg", "https://
+[2025-09-09 16:18:23][INFO] Found 7 items for "Wednesday S01E03"
+[2025-09-09 16:18:23][INFO] Fetching stream for video 19250635 (98f944a3df29469c)
+[2025-09-09 16:18:25][INFO] HTTP GET: https://api.hellspy.to/gw/video/19250635/98f944a3df29469c
+[2025-09-09 16:18:25][INFO] HTTP response (truncated): {"structType": "derivedObject", "objectType": "GWVideo", "id": 19250635, "title": "Wednesday s01e03-08 CZdub- P\u0159\u00edtel nebo vrah 2022.", "fileHash": "98f944a3df29469c", "size": 2489664404, "duration": 2908, "thumbs": ["https://thumbs.hellspy.to/6/8/b/f/0/9//68bf09cd2ed47/1.jpg"], "filename": "Wednesday s01e03-08 CZdub- P\u0159\u00edtel nebo vrah 2022..mkv", "conversions": {"720": "https://storage3.onecdn1.net/145826526/4bruBOimrhLVtzbTP0iXbi1ohp7c4LHwAc1XIxbtAWFdnc1ATKnheKTQYcGZuZQtLACgb
+[2025-09-09 16:18:25][INFO] Video: "Wednesday s01e03-08 CZdub- Přítel nebo vrah 2022." duration 2908 s
+[2025-09-09 16:18:25][INFO] Found 1 qualities for 19250635
+[2025-09-09 16:18:25][INFO] Fetching stream for video 19257914 (c0c9151b0bbeefda)
+[2025-09-09 16:18:26][INFO] HTTP GET: https://api.hellspy.to/gw/video/19257914/c0c9151b0bbeefda
+[2025-09-09 16:18:26][INFO] HTTP response (truncated): {"structType": "derivedObject", "objectType": "GWVideo", "id": 19257914, "title": "Wednesday (S01E03) CZ dabing", "fileHash": "c0c9151b0bbeefda", "size": 657922137, "duration": 2905, "thumbs": ["https://thumbs.hellspy.to/6/8/b/f/9/7//68bf975fb647f/1.jpg"], "filename": "Wednesday (S01E03) CZ dabing.mp4", "conversions": {"480": "https://storage4.onecdn1.net/145879815/3lku3gfv2FDlU0lTwXiE1fO7U3AuGrcl0SZ5S58cP3c7JTW5c0mipqSJ9TrjS16HZrtj4HX7umlSebswOFWqH2kf0mcbdCRWH8dCwYCxZSR2Hy2CXRCOx.mp4?token=A120
+[2025-09-09 16:18:26][INFO] Video: "Wednesday (S01E03) CZ dabing" duration 2905 s
+[2025-09-09 16:18:26][INFO] Found 1 qualities for 19257914
+[2025-09-09 16:18:26][INFO] Fetching stream for video 19258740 (22e3ba5729d19a6b)
+[2025-09-09 16:18:27][INFO] HTTP GET: https://api.hellspy.to/gw/video/19258740/22e3ba5729d19a6b
+[2025-09-09 16:18:27][INFO] HTTP response (truncated): {"structType": "derivedObject", "objectType": "GWVideo", "id": 19258740, "title": "Wednesday (S01E03) CZ dabing", "fileHash": "22e3ba5729d19a6b", "size": 657922137, "duration": 2905, "thumbs": ["https://thumbs.hellspy.to/6/8/b/f/a/b//68bfabe9c46bc/1.jpg"], "filename": "Wednesday (S01E03) CZ dabing.mp4", "conversions": {"480": "https://storage4.onecdn1.net/145886583/Nb7tM0sG7IvxflQUJxcMJsGdHV3t5vc4QhpGh59c0AcQOiAlcwEUnzhkMFgWhOmHYGf68HpRtdZhnRUzEua5HYgCxkTM7CbAHjbfVWClph3DHgxCk5Cog.mp4?token=A120
+[2025-09-09 16:18:27][INFO] Video: "Wednesday (S01E03) CZ dabing" duration 2905 s
+[2025-09-09 16:18:27][INFO] Found 1 qualities for 19258740
+[2025-09-09 16:18:27][INFO] Fetching stream for video 19258286 (587c5130289f0e25)
+[2025-09-09 16:18:29][INFO] HTTP GET: https://api.hellspy.to/gw/video/19258286/587c5130289f0e25
+[2025-09-09 16:18:29][INFO] HTTP response (truncated): {"structType": "derivedObject", "objectType": "GWVideo", "id": 19258286, "title": "Wednesday (S01E03) CZ dabing", "fileHash": "587c5130289f0e25", "size": 657922137, "duration": 2905, "thumbs": ["https://thumbs.hellspy.to/6/8/b/f/9/e//68bf9efcdd247/1.jpg"], "filename": "Wednesday (S01E03) CZ dabing.mp4", "conversions": {"480": "https://storage4.onecdn1.net/145882818/lRGS1afZBSnOtK7f8MTZjfoKu3DSXqcqOhRDhmQc2xc6eiKzcLNF4MhG7coGhMKHwetonHJOSnVhlesBOT3VHXpCLRu2DtQZHKEtRpCZdheLHBjCw3Cdj.mp4?token=A120
+[2025-09-09 16:18:29][INFO] Video: "Wednesday (S01E03) CZ dabing" duration 2905 s
+[2025-09-09 16:18:29][INFO] Found 1 qualities for 19258286
+[2025-09-09 16:18:29][INFO] Fetching stream for video 19258285 (275c94276a95d54f)
+[2025-09-09 16:18:30][INFO] HTTP GET: https://api.hellspy.to/gw/video/19258285/275c94276a95d54f
+[2025-09-09 16:18:30][INFO] HTTP response (truncated): {"structType": "derivedObject", "objectType": "GWVideo", "id": 19258285, "title": "Wednesday (S01E03) CZ dabing", "fileHash": "275c94276a95d54f", "size": 657922137, "duration": 2905, "thumbs": ["https://thumbs.hellspy.to/6/8/b/f/9/e//68bf9efcdce11/1.jpg"], "filename": "Wednesday (S01E03) CZ dabing.mp4", "conversions": {"480": "https://storage4.onecdn1.net/145882821/kAZSkKFkxTYAhm5uWLIOqFl9f2JSD7cxvhgqhKwc8nclMiOgcW6uQYhYpU7Oh8MHb5sXqHMkSkZhWjuZdT0OHpwC6aFPyCgaHDETavCL0hXOHRPCXQC2X.mp4?token=A120
+[2025-09-09 16:18:30][INFO] Video: "Wednesday (S01E03) CZ dabing" duration 2905 s
+[2025-09-09 16:18:30][INFO] Found 1 qualities for 19258285
+[2025-09-09 16:18:30][INFO] Returning 5 streams
+[2025-09-09 16:19:41][START] addon.php loaded
+[2025-09-09 16:19:41][START] addon.php loaded
+[2025-09-09 16:19:42][START] addon.php loaded
+[2025-09-09 16:19:50][START] addon.php loaded
+[2025-09-09 16:19:50][START] addon.php loaded
+[2025-09-09 16:19:54][START] addon.php loaded
+[2025-09-09 16:19:54][START] addon.php loaded
+[2025-09-09 16:20:11][START] addon.php loaded
+[2025-09-09 16:20:44][START] addon.php loaded
+[2025-09-09 16:20:57][START] addon.php loaded
+[2025-09-09 16:20:57][INFO] Stremio GET stream: type=series id=tt0773262:1:2
+[2025-09-09 16:20:57][INFO] Stream request: type=series id=tt0773262:1:2 name=tt0773262:1:2 episode=null
+[2025-09-09 16:20:57][INFO] Fetching titles for tt0773262 from Wikidata
+[2025-09-09 16:20:57][INFO] HTTP GET: https://query.wikidata.org/sparql?query=%0A++++++++++++++SELECT+%3Ffilm+%3FfilmLabel+%3ForiginalTitle+%3FpublicationDate+%3FinstanceLabel+WHERE+%7B%0A++++++++++++++++%3Ffilm+wdt%3AP345+%22tt0773262%22.%0A++++++++++++++++OPTIONAL+%7B+%3Ffilm+wdt%3AP1476+%3ForiginalTitle.+%7D%0A++++++++++++++++OPTIONAL+%7B+%3Ffilm+wdt%3AP577+%3FpublicationDate.+%7D%0A++++++++++++++++OPTIONAL+%7B+%3Ffilm+wdt%3AP31+%3Finstance.+%7D%0A++++++++++++++++SERVICE+wikibase%3Alabel+%7B+bd%3AserviceParam+wikibase%3Alanguage+%22cs%22.+%7D%0A++++++++++++++%7D%0A++++++++++++
+[2025-09-09 16:20:57][INFO] HTTP response (truncated): {
+  "head" : {
+    "vars" : [ "film", "filmLabel", "originalTitle", "publicationDate", "instanceLabel" ]
+  },
+  "results" : {
+    "bindings" : [ {
+      "film" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q23577"
+      },
+      "originalTitle" : {
+        "xml:lang" : "en",
+        "type" : "literal",
+        "value" : "Dexter"
+      },
+      "publicationDate" : {
+        "datatype" : "http://www.w3.org/2001/XMLSchema#dateTime",
+        "type" : "literal",
+      
+[2025-09-09 16:20:59][INFO] HTTP GET: https://query.wikidata.org/sparql?query=%0A++++++++++++++SELECT+%3Ffilm+%3FfilmLabel+%3ForiginalTitle+%3FpublicationDate+%3FinstanceLabel+WHERE+%7B%0A++++++++++++++++%3Ffilm+wdt%3AP345+%22tt0773262%22.%0A++++++++++++++++OPTIONAL+%7B+%3Ffilm+wdt%3AP1476+%3ForiginalTitle.+%7D%0A++++++++++++++++OPTIONAL+%7B+%3Ffilm+wdt%3AP577+%3FpublicationDate.+%7D%0A++++++++++++++++OPTIONAL+%7B+%3Ffilm+wdt%3AP31+%3Finstance.+%7D%0A++++++++++++++++SERVICE+wikibase%3Alabel+%7B+bd%3AserviceParam+wikibase%3Alanguage+%22en%22.+%7D%0A++++++++++++++%7D%0A++++++++++++
+[2025-09-09 16:20:59][INFO] HTTP response (truncated): {
+  "head" : {
+    "vars" : [ "film", "filmLabel", "originalTitle", "publicationDate", "instanceLabel" ]
+  },
+  "results" : {
+    "bindings" : [ {
+      "film" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q23577"
+      },
+      "originalTitle" : {
+        "xml:lang" : "en",
+        "type" : "literal",
+        "value" : "Dexter"
+      },
+      "publicationDate" : {
+        "datatype" : "http://www.w3.org/2001/XMLSchema#dateTime",
+        "type" : "literal",
+      
+[2025-09-09 16:20:59][INFO] Wikidata resolved: EN=Dexter, CZ=Dexter, Year=2007
+[2025-09-09 16:20:59][INFO] Searching Hellspy for "Dexter S01E02"...
+[2025-09-09 16:21:01][INFO] HTTP GET: https://api.hellspy.to/gw/search?query=Dexter+S01E02&offset=0&limit=64
+[2025-09-09 16:21:01][INFO] HTTP response (truncated): {"items": [{"structType": "derivedObject", "objectType": "GWSearchVideo", "id": 12992572, "title": "DEXTER_S01E02_Krokod\u00edlie slzy", "fileHash": "6d1706618c913d81", "size": 3247518856, "duration": 3290, "thumbs": ["https://thumbs.hellspy.to/6/4/9/5/3/3//64953351de95e/1.jpg", "https://thumbs.hellspy.to/6/4/9/5/3/3//64953351de95e/2.jpg", "https://thumbs.hellspy.to/6/4/9/5/3/3//64953351de95e/3.jpg", "https://thumbs.hellspy.to/6/4/9/5/3/3//64953351de95e/4.jpg", "https://thumbs.hellspy.to/6/4/9/5
+[2025-09-09 16:21:01][INFO] Found 24 items for "Dexter S01E02"
+[2025-09-09 16:21:01][INFO] Fetching stream for video 12992572 (6d1706618c913d81)
+[2025-09-09 16:21:02][INFO] HTTP GET: https://api.hellspy.to/gw/video/12992572/6d1706618c913d81
+[2025-09-09 16:21:02][INFO] HTTP response (truncated): {"structType": "derivedObject", "objectType": "GWVideo", "id": 12992572, "title": "DEXTER_S01E02_Krokod\u00edlie slzy", "fileHash": "6d1706618c913d81", "size": 3247518856, "duration": 3290, "thumbs": ["https://thumbs.hellspy.to/6/4/9/5/3/3//64953351de95e/1.jpg"], "filename": "DEXTER_S01E02_Krokod\u00edlie slzy.mkv", "conversions": {"720": "https://storage4.onecdn1.net/41876263/7LEFXEHe7TbvhkrTlXtmrHykFMgTPjiZrha7UBLFXVIZ6hb3t68ibaclET6gTaLTREuyKc2XTxzTADIGJSP3sBOC3KFgKhxof9OuZ5cRAcpwtMdtXbCOw.mp
+[2025-09-09 16:21:02][INFO] Video: "DEXTER_S01E02_Krokodílie slzy" duration 3290 s
+[2025-09-09 16:21:02][INFO] Found 2 qualities for 12992572
+[2025-09-09 16:21:02][INFO] Fetching stream for video 12988427 (e556a0c6b4e801c7)
+[2025-09-09 16:21:03][INFO] HTTP GET: https://api.hellspy.to/gw/video/12988427/e556a0c6b4e801c7
+[2025-09-09 16:21:03][INFO] HTTP response (truncated): {"structType": "derivedObject", "objectType": "GWVideo", "id": 12988427, "title": "DEXTER_S01E02_Krokod\u00edlie slzy", "fileHash": "e556a0c6b4e801c7", "size": 3247518856, "duration": 3290, "thumbs": ["https://thumbs.hellspy.to/6/4/9/4/6/7//64946741bb557/1.jpg"], "filename": "DEXTER_S01E02_Krokod\u00edlie slzy.mkv", "conversions": {"720": "https://storage4.onecdn1.net/41857666/VdWIZ5fj0iE7i7bue0FabfjGIRVijXhQjswoS4yIpAU7WsYlF6Whwac70C9bCpwi4nuQqc5vCxmiw0iNKHErfLwCEvIV7spZt40t75cJGcE3FlPFjgCwP.mp
+[2025-09-09 16:21:03][INFO] Video: "DEXTER_S01E02_Krokodílie slzy" duration 3290 s
+[2025-09-09 16:21:03][INFO] Found 2 qualities for 12988427
+[2025-09-09 16:21:03][INFO] Fetching stream for video 13107457 (6feda19090231050)
+[2025-09-09 16:21:05][INFO] HTTP GET: https://api.hellspy.to/gw/video/13107457/6feda19090231050
+[2025-09-09 16:21:05][INFO] HTTP response (truncated): {"structType": "derivedObject", "objectType": "GWVideo", "id": 13107457, "title": "DEXTER_S01E02_Krokod\u00edlie slzy", "fileHash": "6feda19090231050", "size": 3247518856, "duration": 3290, "thumbs": ["https://thumbs.hellspy.to/6/4/a/d/c/9//64adc922a7ce7/1.jpg"], "filename": "DEXTER_S01E02_Krokod\u00edlie slzy.mkv", "conversions": {"720": "https://storage4.onecdn1.net/42356786/Nl7ug5sOeIQlfGMimZUgwsZeuKQSoqCbjt1whRXsLNi9QtQ4U1ZCKQsQ5tMpUowSRxFBRiN8SqaSOLSV9f6GUprH39uYwtkvTb7TDecezcmDUMbUGZH1D.mp
+[2025-09-09 16:21:05][INFO] Video: "DEXTER_S01E02_Krokodílie slzy" duration 3290 s
+[2025-09-09 16:21:05][INFO] Found 2 qualities for 13107457
+[2025-09-09 16:21:05][INFO] Fetching stream for video 14951917 (1a9f931620b4e112)
+[2025-09-09 16:21:06][INFO] HTTP GET: https://api.hellspy.to/gw/video/14951917/1a9f931620b4e112
+[2025-09-09 16:21:06][INFO] HTTP response (truncated): {"structType": "derivedObject", "objectType": "GWVideo", "id": 14951917, "title": "DEXTER_S01E02_Krokod\u00edlie slzy", "fileHash": "1a9f931620b4e112", "size": 3247518856, "duration": 3290, "thumbs": ["https://thumbs.hellspy.to/6/6/0/1/f/3//6601f3ed917ef/1.jpg"], "filename": "DEXTER_S01E02_Krokod\u00edlie slzy.mkv", "conversions": {"720": "https://storage4.onecdn1.net/75163727/8zQi20HgOtkyTVgfBZHW2H1MiLdtV9fbDS3aFoQtZdh10SoEsKMfw1uaDtZWcvZt6yI3vF4RuVvt1EINMTbXTxLUKwi95SkpCjMCB2uyxuQrsE0sm4UaR.mp
+[2025-09-09 16:21:06][INFO] Video: "DEXTER_S01E02_Krokodílie slzy" duration 3290 s
+[2025-09-09 16:21:06][INFO] Found 2 qualities for 14951917
+[2025-09-09 16:21:06][INFO] Fetching stream for video 9980541 (fb9cb93f8757ba70)
+[2025-09-09 16:21:07][INFO] HTTP GET: https://api.hellspy.to/gw/video/9980541/fb9cb93f8757ba70
+[2025-09-09 16:21:07][INFO] HTTP response (truncated): {"structType": "derivedObject", "objectType": "GWVideo", "id": 9980541, "title": "Dexter - s01e02 CZ", "fileHash": "fb9cb93f8757ba70", "size": 2465472814, "duration": 3279, "thumbs": ["https://thumbs.hellspy.to/6/1/4/0/d/2//6140d295d61c0/1.jpg"], "filename": "Dexter - s01e02 CZ.mkv", "conversions": {"480": "https://storage3.onecdn1.net/24912614/e4JFXgCDgTB2I7VU4dCqBCmOS2XixaIKOsdgTJ3T3msWXFVEFbDSV2TNWCMKc0gSMASM1fWlS4Au36hgOsl5c5AFMyfPQT2ETYju8BHbOU2qhBRFXPUek.mp4?token=A1206ZyNVCax&expires=1757
+[2025-09-09 16:21:07][INFO] Video: "Dexter - s01e02 CZ" duration 3279 s
+[2025-09-09 16:21:07][INFO] Found 2 qualities for 9980541
+[2025-09-09 16:21:07][INFO] Returning 10 streams
+[2025-09-09 16:21:11][START] addon.php loaded
+[2025-09-09 16:21:11][INFO] Stremio GET stream: type=series id=tt13443470:1:4
+[2025-09-09 16:21:11][INFO] Stream request: type=series id=tt13443470:1:4 name=tt13443470:1:4 episode=null
+[2025-09-09 16:21:11][INFO] Searching Hellspy for "Wednesday S01E04"...
+[2025-09-09 16:21:11][INFO] HTTP GET: https://api.hellspy.to/gw/search?query=Wednesday+S01E04&offset=0&limit=64
+[2025-09-09 16:21:11][INFO] HTTP response (truncated): {"items": [{"structType": "derivedObject", "objectType": "GWSearchVideo", "id": 19233469, "title": "Wednesday s01e04-08 CZdub- Vedle tebe um\u00edr\u00e1m 2022.", "fileHash": "b7a1be8bff5daaa4", "size": 2273776943, "duration": 2984, "thumbs": ["https://thumbs.hellspy.to/6/8/b/d/9/b//68bd9b957ab5e/1.jpg", "https://thumbs.hellspy.to/6/8/b/d/9/b//68bd9b957ab5e/2.jpg", "https://thumbs.hellspy.to/6/8/b/d/9/b//68bd9b957ab5e/3.jpg", "https://thumbs.hellspy.to/6/8/b/d/9/b//68bd9b957ab5e/4.jpg", "https:/
+[2025-09-09 16:21:11][INFO] Found 7 items for "Wednesday S01E04"
+[2025-09-09 16:21:11][INFO] Fetching stream for video 19233469 (b7a1be8bff5daaa4)
+[2025-09-09 16:21:13][INFO] HTTP GET: https://api.hellspy.to/gw/video/19233469/b7a1be8bff5daaa4
+[2025-09-09 16:21:13][INFO] HTTP response (truncated): {"structType": "derivedObject", "objectType": "GWVideo", "id": 19233469, "title": "Wednesday s01e04-08 CZdub- Vedle tebe um\u00edr\u00e1m 2022.", "fileHash": "b7a1be8bff5daaa4", "size": 2273776943, "duration": 2984, "thumbs": ["https://thumbs.hellspy.to/6/8/b/d/9/b//68bd9b957ab5e/1.jpg"], "filename": "Wednesday s01e04-08 CZdub- Vedle tebe um\u00edr\u00e1m 2022..mkv", "conversions": {"720": "https://storage3.onecdn1.net/145696257/MkMTAlSQxUxMfMYf6efGwS37Cb5cwqh1QsPbhdGhadf47HeDcr2sY4FW3FMRFrJUoMT
+[2025-09-09 16:21:13][INFO] Video: "Wednesday s01e04-08 CZdub- Vedle tebe umírám 2022." duration 2984 s
+[2025-09-09 16:21:13][INFO] Found 1 qualities for 19233469
+[2025-09-09 16:21:13][INFO] Fetching stream for video 19258333 (28d685a7bae93c86)
+[2025-09-09 16:21:14][INFO] HTTP GET: https://api.hellspy.to/gw/video/19258333/28d685a7bae93c86
+[2025-09-09 16:21:14][INFO] HTTP response (truncated): {"structType": "derivedObject", "objectType": "GWVideo", "id": 19258333, "title": "Wednesday.S01E04 CZdab 1080p", "fileHash": "28d685a7bae93c86", "size": 988932557, "duration": 2984, "thumbs": ["https://thumbs.hellspy.to/6/8/b/f/a/0//68bfa0258f4d3/1.jpg"], "filename": "Wednesday.S01E04 CZdab 1080p.mkv", "conversions": {"720": "https://storage4.onecdn1.net/145883226/JE8i56UEdFy5sMgsp7S9nUM0T7RIvmTZWTXZFpYcL0tKgSqASovTjMIOmH4mFL4izqHlmHrmIKMFw8HO3C8jCrpFvXIogHLnFDWhZGSO1FAxHGRHOnsLA.mp4?token=A120
+[2025-09-09 16:21:14][INFO] Video: "Wednesday.S01E04 CZdab 1080p" duration 2984 s
+[2025-09-09 16:21:14][INFO] Found 1 qualities for 19258333
+[2025-09-09 16:21:14][INFO] Fetching stream for video 19258334 (e93c911d0c2bdf4f)
+[2025-09-09 16:21:15][INFO] HTTP GET: https://api.hellspy.to/gw/video/19258334/e93c911d0c2bdf4f
+[2025-09-09 16:21:15][INFO] HTTP response (truncated): {"structType": "derivedObject", "objectType": "GWVideo", "id": 19258334, "title": "Wednesday.S01E04 CZdab 1080p", "fileHash": "e93c911d0c2bdf4f", "size": 988932557, "duration": 2984, "thumbs": ["https://thumbs.hellspy.to/6/8/b/f/a/0//68bfa025958e3/1.jpg"], "filename": "Wednesday.S01E04 CZdab 1080p.mkv", "conversions": {"720": "https://storage4.onecdn1.net/145883223/YEpi7bTRQu8QsMRf6Kfn1TQGckOIqvuwxu35hZlcO5t27SzVSAkFLnIdVHlbuMjiWLHzYHRbIL9sYBHvXCxgCOZsAXIDEHdysQdhrdSkQsW7HanHdzfdp.mp4?token=A120
+[2025-09-09 16:21:15][INFO] Video: "Wednesday.S01E04 CZdab 1080p" duration 2984 s
+[2025-09-09 16:21:15][INFO] Found 1 qualities for 19258334
+[2025-09-09 16:21:15][INFO] Fetching stream for video 19258789 (0386a4e641655031)
+[2025-09-09 16:21:17][INFO] HTTP GET: https://api.hellspy.to/gw/video/19258789/0386a4e641655031
+[2025-09-09 16:21:17][INFO] HTTP response (truncated): {"structType": "derivedObject", "objectType": "GWVideo", "id": 19258789, "title": "Wednesday.S01E04 CZdab 1080p", "fileHash": "0386a4e641655031", "size": 988932557, "duration": 2984, "thumbs": ["https://thumbs.hellspy.to/6/8/b/f/a/c//68bfacef89733/1.jpg"], "filename": "Wednesday.S01E04 CZdab 1080p.mkv", "conversions": {"720": "https://storage4.onecdn1.net/145887048/AmJi7bf08iK4hg0fMwtl9fbyTqwIExTnPTaKT4acB3tOwSZWSWjT3wIRpHOKTlniyOHjgHYbIprsJzHPNCAMCV0sONI4qHRjsBjhgkSr0sK7HQRHRKFRY.mp4?token=A120
+[2025-09-09 16:21:17][INFO] Video: "Wednesday.S01E04 CZdab 1080p" duration 2984 s
+[2025-09-09 16:21:17][INFO] Found 1 qualities for 19258789
+[2025-09-09 16:21:17][INFO] Fetching stream for video 19257819 (35f33098cdfd4b05)
+[2025-09-09 16:21:18][INFO] HTTP GET: https://api.hellspy.to/gw/video/19257819/35f33098cdfd4b05
+[2025-09-09 16:21:18][INFO] HTTP response (truncated): {"structType": "derivedObject", "objectType": "GWVideo", "id": 19257819, "title": "Wednesday.S01E04 CZdab 1080p", "fileHash": "35f33098cdfd4b05", "size": 988932557, "duration": 2984, "thumbs": ["https://thumbs.hellspy.to/6/8/b/f/9/5//68bf954c0ecf3/1.jpg"], "filename": "Wednesday.S01E04 CZdab 1080p.mkv", "conversions": {"720": "https://storage4.onecdn1.net/145879104/DKruqQfvrhJnHyLiqQF94f6BHrzI8qhQ9hDZF7QcmzTQKFKRFa2hyBIzZHDvIBguPDHBaHnmI09i2OHPaC7vCgzidBIYXHrQix3Sv2Fm3iG2HXnHQxsDb.mp4?token=A120
+[2025-09-09 16:21:18][INFO] Video: "Wednesday.S01E04 CZdab 1080p" duration 2984 s
+[2025-09-09 16:21:18][INFO] Found 1 qualities for 19257819
+[2025-09-09 16:21:18][INFO] Returning 5 streams
