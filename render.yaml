@@ -1,0 +1,5 @@
+services:
+  - type: web
+    name: stremio-php-addon
+    env: docker
+    plan: free
